@@ -7,7 +7,7 @@ const Navbar = () => {
         <h1 className="text-xl">E-Commerce</h1>
         <ul className="flex gap-6 nowrap items-center">
           <li><NavLink to="/contact" className="text-sm hover:border-b border-neutral-600">Get in Touch</NavLink></li>
-          <li><a href="#" className="flex gap-1 items-center text-sm bg-stone-100 bg-opacity-80 hover:bg-stone-200 px-4 py-3 border rounded-full border-neutral-400"><span>Check-out</span><FaShoppingCart /></a></li>
+          <li><a href="#" className="flex gap-1 items-center text-sm bg-orange-700 text-white transition hover:opacity-75 px-4 py-2 rounded-md shadow-md shadow-orange-400 tracking-wide"><span>Check-out</span><FaShoppingCart /></a></li>
         </ul>
     </div>
   )

@@ -1,6 +1,8 @@
-const ProductDetails = () => {
+import Product from "../components/Product"
+
+const ProductDetails = ({product}) => {
   return (
-    <div>ProductDetails</div>
+    <Product/>
   )
 }
 export default ProductDetails
