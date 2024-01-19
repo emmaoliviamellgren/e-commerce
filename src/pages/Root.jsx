@@ -1,5 +1,5 @@
-// TODO: Skapa Skeleton när produkterna/API laddas
-
+// TODO: 1. Skapa detaljsida för produkter med Context API
+// TODO: 2. Skapa Skeleton när produkterna/API laddas
 
 import { Outlet, useLocation } from 'react-router-dom';
 import ProductsContextProvider from '../contexts/ProductsContext';
@@ -15,7 +15,6 @@ function Root() {
     const location = useLocation();
 
     return (
-        <>
         <ProductsContextProvider>
             <Navbar />
             <Outlet />
@@ -27,7 +26,6 @@ function Root() {
             )}
             <Footer />
         </ProductsContextProvider>
-        </>
     );
 }
 export default Root;

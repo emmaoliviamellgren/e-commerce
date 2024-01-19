@@ -1,18 +1,32 @@
-import { createContext } from "react"
+import { createContext, useState, useEffect } from 'react';
 
-export const ProductsContext = createContext()
+export const ProductsContext = createContext();
 
 const ProductsContextProvider = ({ children }) => {
+    const API_KEY = 'https://js2-ecommerce-api.vercel.app/api/products';
+    const [products, setProducts] = useState([]);
 
-    const value = {
-        test: 'hej',
-    }
+    useEffect(() => {
+        fetch(API_KEY)
+            .then((response) => {
+                if (!response.ok) {
+                    console.log('Something went wrong.' + response.status);
+                    return;
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setProducts(data);
+            });
+    }, [API_KEY]);
+
+    const value = { products };
 
     return (
         <ProductsContext.Provider value={value}>
-            { children }
+            {children}
         </ProductsContext.Provider>
-    )
-}
+    );
+};
 
-export default ProductsContextProvider
+export default ProductsContextProvider;
