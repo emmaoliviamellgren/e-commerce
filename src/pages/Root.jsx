@@ -1,7 +1,8 @@
-// React Icon Pack
-// import { icon } from "react-icons/ai";
+// TODO: Skapa Skeleton när produkterna/API laddas
+
 
 import { Outlet, useLocation } from 'react-router-dom';
+import ProductsContextProvider from '../contexts/ProductsContext';
 
 // Components
 import Footer from '../components/Footer';
@@ -15,6 +16,7 @@ function Root() {
 
     return (
         <>
+        <ProductsContextProvider>
             <Navbar />
             <Outlet />
             {location.pathname === '/' && (
@@ -24,6 +26,7 @@ function Root() {
                 </>
             )}
             <Footer />
+        </ProductsContextProvider>
         </>
     );
 }
