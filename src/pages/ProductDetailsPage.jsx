@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ProductsContext } from '../contexts/ProductsContext';
 import { useParams } from 'react-router-dom';
 
-const ProductDetails = () => {
+const ProductDetailsPage = () => {
   const { products } = useContext(ProductsContext);
   const { _id } = useParams();
 
@@ -23,4 +23,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default ProductDetailsPage;

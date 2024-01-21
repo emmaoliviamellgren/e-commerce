@@ -1,8 +1,8 @@
 import Form from "../components/Form"
 
-const Contact = () => {
+const ContactPage = () => {
   return (
     <Form/>
     )
 }
-export default Contact
+export default ContactPage

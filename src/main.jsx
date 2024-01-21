@@ -4,24 +4,24 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Pages
-import Root from './pages/Root';
+import RootPage from './pages/RootPage';
 import ErrorPage from './pages/ErrorPage';
-import Contact from './pages/Contact';
-import ProductDetails from './pages/ProductDetails';
+import ContactPage from './pages/ContactPage';
+import ProductDetailsPage from './pages/ProductDetailsPage';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Root />,
+        element: <RootPage />,
         errorElement: <ErrorPage />,
         children: [
             {
                 path: 'contact',
-                element: <Contact />,
+                element: <ContactPage />,
             },
             {
                 path: 'product/:_id',
-                element: <ProductDetails />,
+                element: <ProductDetailsPage />,
             },
         ],
     },
