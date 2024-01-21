@@ -1,21 +1,26 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { ProductsContext } from '../contexts/ProductsContext';
 import { useParams } from 'react-router-dom';
-import Product from '../components/Product';
 
 const ProductDetails = () => {
-    const { products } = useContext(ProductsContext);
-    const { _id } = useParams();
+  const { products } = useContext(ProductsContext);
+  const { _id } = useParams();
 
-    const [product, setProduct] = useState();
+  const product = products?.find((product) => product._id === _id);
 
-    useEffect(() => {
-      if(_id) {
-        const myProduct = products.find((product) => product.id === _id);
-        setProduct(myProduct);
-      }
-    }, [_id]);
+  if (!product) {
+    return <div>Loading...</div>;
+  }
 
-    return <>{product && <Product product={product}/>}</>;
+  return (
+    <>
+      <div className='bg-white h-[550px] w-full'>
+        <div className='w-2/3'>
+          <h3 className='text-sm text-gray-700 hover:text-gray-900'>{product.name}</h3>
+        </div>
+      </div>        
+    </>
+  );
 };
+
 export default ProductDetails;
