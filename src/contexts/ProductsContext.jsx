@@ -20,10 +20,8 @@ const ProductsContextProvider = ({ children }) => {
             });
     }, [API_KEY]);
 
-    const value = { products };
-
     return (
-        <ProductsContext.Provider value={value}>
+        <ProductsContext.Provider value={{products}}>
             {children}
         </ProductsContext.Provider>
     );

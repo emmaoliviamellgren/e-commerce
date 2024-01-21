@@ -16,11 +16,11 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
-                path: '/contact',
+                path: 'contact',
                 element: <Contact />,
             },
             {
-                path: '/product/:_id',
+                path: 'product/:_id',
                 element: <ProductDetails />,
             },
         ],

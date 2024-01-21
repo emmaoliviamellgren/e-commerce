@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import ProductCard from './ProductCard';
 import { ProductsContext } from '../contexts/ProductsContext';
+import ProductCard from './ProductCard';
 
 const ProductGrid = () => {
     const { products } = useContext(ProductsContext);
@@ -10,10 +10,14 @@ const ProductGrid = () => {
             {products &&
                 products.map((product) => {
                     return (
-                        <ProductCard
+                        <>
+                        {product && (
+                            <ProductCard
                             product={product}
                             key={product._id}
                         />
+                        )}
+                        </>
                     );
                 })}
         </div>
