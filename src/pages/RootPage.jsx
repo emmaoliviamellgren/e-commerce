@@ -1,6 +1,5 @@
-// TODO: 1. Skapa detaljsida för produkter med Context API
+// TODO: 1. Fixa varukorg för varje produkt som leder till en checkoutsida
 // TODO: 2. Skapa Skeleton när produkterna/API laddas
-// TODO: 3. Fixa varukorg för varje produkt som leder till en checkoutsida
 
 import { Outlet, useLocation } from 'react-router-dom';
 import ProductsContextProvider from '../contexts/ProductsContext';

@@ -8,6 +8,7 @@ import RootPage from './pages/RootPage';
 import ErrorPage from './pages/ErrorPage';
 import ContactPage from './pages/ContactPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 const router = createBrowserRouter([
     {
@@ -23,8 +24,12 @@ const router = createBrowserRouter([
                 path: 'product/:_id',
                 element: <ProductDetailsPage />,
             },
+            {
+                path: 'checkout',
+                element: <CheckoutPage />,
+            }
         ],
-    },
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

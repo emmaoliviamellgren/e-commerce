@@ -21,9 +21,9 @@ const Navbar = () => {
                 </li>
                 <li>
                     <NavLink
-                        to='#'
+                        to='/checkout'
                         className='flex gap-1 items-center text-sm bg-orange-700 text-white transition hover:opacity-75 px-4 py-2 rounded-md shadow-md shadow-orange-400 tracking-wide'>
-                        <span>Check-out</span>
+                        <span>Checkout</span>
                         <FaShoppingCart />
                     </NavLink>
                 </li>
