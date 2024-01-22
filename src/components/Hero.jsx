@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import img from '../assets/computer.jpeg';
 
 const Hero = () => {
@@ -6,9 +7,14 @@ const Hero = () => {
             <div
                 className='h-full bg-cover'
                 style={{ backgroundImage: `url(${img})` }}>
-                <h1 className='max-w-2 lg:max-w-none text-2xl relative top-1/2 left-2/3'>
-                    Buy our products
-                </h1>
+                <div className='max-w-2 lg:max-w-none relative top-1/2 left-2/3'>
+                    <h1 className='text-2xl'>Buy our products</h1>
+                    <h2 className='text-sm py-4'>Or <Link
+                        to='/contact'
+                        className='text-sm hover:underline text-orange-600'>
+                        Get in Touch
+                    </Link></h2>
+                </div>
             </div>
         </div>
     );

@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import { CartContext } from './CartContext';
 
 export const ProductsContext = createContext();
 
@@ -21,7 +22,7 @@ const ProductsContextProvider = ({ children }) => {
     }, [API_KEY]);
 
     return (
-        <ProductsContext.Provider value={{products}}>
+        <ProductsContext.Provider value={{ products }}>
             {children}
         </ProductsContext.Provider>
     );

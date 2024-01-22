@@ -1,10 +1,12 @@
-import { useContext } from 'react';
-import { ProductsContext } from '../contexts/ProductsContext';
 import { Link, useParams } from 'react-router-dom';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
+import { useContext } from 'react';
+import { ProductsContext } from '../contexts/ProductsContext';
+import { CartContext } from '../contexts/CartContext';
 
 const ProductDetailsPage = () => {
     const { products } = useContext(ProductsContext);
+    const { cartItems, addToCart } = useContext(CartContext);
     const { _id } = useParams();
 
     const product = products?.find((product) => product._id === _id);
@@ -69,11 +71,11 @@ const ProductDetailsPage = () => {
                             {product.description}
                         </p>
                     </div>
-                    <Link
-                        to=''
+                    <button
+                        onClick={() => addToCart(product)}
                         className='text-center mx-auto text-sm bg-orange-700 text-white transition hover:opacity-75 px-4 py-2 rounded-md shadow-md shadow-orange-400 tracking-wide w-1/3'>
                         Add to cart
-                    </Link>
+                    </button>
                 </div>
             </div>
         </div>

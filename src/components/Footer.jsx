@@ -7,6 +7,11 @@ const Footer = () => {
     return (
         <div className='bottom-0 w-full flex items-center justify-around h-28 border-t border-slate-300'>
             <div className='search'>E-commerce</div>
+            <Link
+                        to='/contact'
+                        className='text-sm hover:border-b border-neutral-600'>
+                        Get in Touch
+                    </Link>
             <div className='social-icons flex gap-2'>
                 <Link
                     to='#'

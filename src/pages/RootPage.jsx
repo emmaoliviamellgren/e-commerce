@@ -2,7 +2,10 @@
 // TODO: 2. Skapa Skeleton när produkterna/API laddas
 
 import { Outlet, useLocation } from 'react-router-dom';
+
+// Contexts
 import ProductsContextProvider from '../contexts/ProductsContext';
+import CartContextProvider from '../contexts/CartContext';
 
 // Components
 import Footer from '../components/Footer';
@@ -15,17 +18,19 @@ function Root() {
     const location = useLocation();
 
     return (
-        <ProductsContextProvider>
-            <Navbar />
-            <Outlet />
-            {location.pathname === '/' && (
-                <>
-                    <Hero />
-                    <ProductGrid />
-                </>
-            )}
-            <Footer />
-        </ProductsContextProvider>
+        <CartContextProvider>
+            <ProductsContextProvider>
+                <Navbar />
+                <Outlet />
+                {location.pathname === '/' && (
+                    <>
+                        <Hero />
+                        <ProductGrid />
+                    </>
+                )}
+                <Footer />
+            </ProductsContextProvider>
+        </CartContextProvider>
     );
 }
 export default Root;
