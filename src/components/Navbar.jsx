@@ -6,10 +6,11 @@ import { CartContext } from '../contexts/CartContext';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { SiSinglestore } from 'react-icons/si';
 import { LuShoppingCart } from 'react-icons/lu';
-import { Fragment, useContext } from 'react';
+import { Fragment, useContext, useState } from 'react';
 
 const Navbar = () => {
-    const { cartItems } = useContext(CartContext);
+    const { cartItems, addToCart, displayAmountOfItems } =
+        useContext(CartContext);
 
     return (
         <div className='w-full flex items-center justify-around h-24 border-b border-slate-300'>
@@ -33,7 +34,12 @@ const Navbar = () => {
                             <>
                                 <Popover.Button>
                                     <span>
-                                        <LuShoppingCart className='text-2xl outline-none'/><span className='text-xs'>icon</span>
+                                        <LuShoppingCart className='text-2xl outline-none' />
+                                        <span className='text-sm font-semibold absolute left-4 bottom-5 bg-red-400 h-6 w-6 rounded-full'>
+                                            <span className='absolute -translate-x-1 translate-y-0.5'>
+                                                {displayAmountOfItems()}
+                                            </span>
+                                        </span>
                                     </span>
                                 </Popover.Button>
                                 <Transition
@@ -49,13 +55,15 @@ const Navbar = () => {
                                             <div className='bg-gray-50 p-4 text-center'>
                                                 {cartItems.length > 0 ? (
                                                     <NavLink
-                                                    to='/checkout'
-                                                    className='flex gap-1 justify-center items-center text-sm bg-orange-700 text-white transition hover:opacity-75 px-4 py-2 rounded-md shadow-md shadow-orange-400 tracking-wide'>
-                                                    <span>Checkout</span>
-                                                    <FaShoppingCart />
-                                                </NavLink>
+                                                        to='/checkout'
+                                                        className='flex gap-1 justify-center items-center text-sm bg-orange-700 text-white transition hover:opacity-75 px-4 py-2 rounded-md shadow-md shadow-orange-400 tracking-wide'>
+                                                        <span>Checkout</span>
+                                                        <FaShoppingCart />
+                                                    </NavLink>
                                                 ) : (
-                                                    <p className='text-xs'>Your cart is empty</p>
+                                                    <p className='text-xs'>
+                                                        Your cart is empty
+                                                    </p>
                                                 )}
                                             </div>
                                         </div>

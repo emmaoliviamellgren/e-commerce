@@ -1,14 +1,19 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
 
+    const displayAmountOfItems = () => {
+        return cartItems.reduce((total, item) => total + item.quantity, 0);
+    };
+
+    console.log(displayAmountOfItems);
     // Add items to cart
     const addToCart = (item) => {
         const isItemInCart = cartItems.find(
-            (cartItem) => cartItem.id === item.id
+            (cartItem) => cartItem._id === item._id
         ); // check if the item is already in the cart
 
         if (isItemInCart) {
@@ -17,7 +22,7 @@ const CartContextProvider = ({ children }) => {
                     (
                         cartItem // if the item is already in the cart, increase the quantity of the item
                     ) =>
-                        cartItem.id === item.id
+                        cartItem._id === item._id
                             ? { ...cartItem, quantity: cartItem.quantity + 1 }
                             : cartItem // otherwise, return the cart item
                 )
@@ -30,17 +35,17 @@ const CartContextProvider = ({ children }) => {
     // Remove items from cart
     const removeFromCart = (item) => {
         const isItemInCart = cartItems.find(
-            (cartItem) => cartItem.id === item.id
+            (cartItem) => cartItem._id === item._id
         );
 
         if (isItemInCart.quantity === 1) {
             setCartItems(
-                cartItems.filter((cartItem) => cartItem.id !== item.id)
+                cartItems.filter((cartItem) => cartItem._id !== item._id)
             ); // if the quantity of the item is 1, remove the item from the cart
         } else {
             setCartItems(
                 cartItems.map((cartItem) =>
-                    cartItem.id === item.id
+                    cartItem._id === item._id
                         ? { ...cartItem, quantity: cartItem.quantity - 1 } // if the quantity of the item is greater than 1, decrease the quantity of the item
                         : cartItem
                 )
@@ -69,6 +74,7 @@ const CartContextProvider = ({ children }) => {
                 removeFromCart,
                 clearCart,
                 getCartTotal,
+                displayAmountOfItems,
             }}>
             {children}
         </CartContext.Provider>

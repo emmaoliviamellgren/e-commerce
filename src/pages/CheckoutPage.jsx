@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { useContext } from 'react';
-import { ProductsContext } from '../contexts/ProductsContext';
 import { CartContext } from '../contexts/CartContext';
+import { ProductsContext } from '../contexts/ProductsContext';
 
 const CheckoutPage = () => {
     const { products } = useContext(ProductsContext);
@@ -16,6 +16,7 @@ const CheckoutPage = () => {
                     <div className='text-lg font-medium text-gray-900'>
                         Shopping cart
                     </div>
+                    <button className='text-sm font-medium text-orange-600 hover:opacity-75' onClick={() => clearCart()}>Clear shopping cart</button>
                 </div>
 
                 <div className='mt-8'>
@@ -67,20 +68,20 @@ const CheckoutPage = () => {
                                                         <button
                                                             className='px-4 py-1 rounded-md border border-gray-200 shadow-md'
                                                             onClick={() => {
-                                                                addToCart(item);
-                                                            }}>
-                                                            +
-                                                        </button>
-
-                                                        <button
-                                                            className='px-4 py-1 rounded-md border border-gray-200 shadow-md'
-                                                            onClick={() => {
                                                                 removeFromCart(
                                                                     item
                                                                 );
                                                             }}>
                                                             -
                                                         </button>
+                                                        <button
+                                                            className='px-4 py-1 rounded-md border border-gray-200 shadow-md'
+                                                            onClick={() => {
+                                                                addToCart(item);
+                                                            }}>
+                                                            +
+                                                        </button>
+
                                                     </div>
                                                     {/* Remove from cart */}
                                                     <button
@@ -107,11 +108,8 @@ const CheckoutPage = () => {
                     <>
                         <div className='flex justify-between text-base font-medium text-gray-900'>
                             <p>Subtotal</p>
-                            <p>{getCartTotal()}</p>
+                            <p>{getCartTotal()} SEK</p>
                         </div>
-                        <p className='mt-0.5 text-sm text-gray-500'>
-                            Shipping and taxes calculated at checkout.
-                        </p>
                         <div className='my-6 flex justify-center'>
                             <Link
                                 to='#'
