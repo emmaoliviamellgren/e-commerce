@@ -9,6 +9,7 @@ import ErrorPage from './pages/ErrorPage';
 import ContactPage from './pages/ContactPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import CheckoutPage from './pages/CheckoutPage';
+import CheckoutSuccessfulPage from './pages/CheckoutSuccessfulPage';
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             {
                 path: 'checkout',
                 element: <CheckoutPage />,
+            },
+            {
+                path: 'checkoutsuccessfull',
+                element: <CheckoutSuccessfulPage />,
             }
         ],
     }

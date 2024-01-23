@@ -1,19 +1,39 @@
 import { Link, useParams } from 'react-router-dom';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ProductsContext } from '../contexts/ProductsContext';
 import { CartContext } from '../contexts/CartContext';
+import { Transition } from '@headlessui/react';
 
 const ProductDetailsPage = () => {
     const { products } = useContext(ProductsContext);
     const { cartItems, addToCart } = useContext(CartContext);
     const { _id } = useParams();
 
+    // Render product
     const product = products?.find((product) => product._id === _id);
 
     if (!product) {
         return <div className='text-center my-8 text-2xl'>Loading...</div>;
     }
+
+    // Alert when add to cart button is clicked
+    const [alert, setAlert] = useState(null);
+    const [toggleAlert, setToggleAlert] = useState(false)
+
+    useEffect(() => {
+        if (alert) {
+            setToggleAlert(true);
+            let timer = setTimeout(() => {
+                setToggleAlert(false);
+            }, 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [alert]);
+
+    const addedToCartAlert = () => {
+        setAlert('Item added to cart');
+    };
 
     return (
         <div className='rounded-lg bg-white overflow-hidden border border-slate-300 shadow-md shadow-slate-400 mx-6 my-14 md:mx-auto max-w-2xl items-center px-4 sm:px-6 lg:max-w-6xl lg:px-8'>
@@ -72,10 +92,27 @@ const ProductDetailsPage = () => {
                         </p>
                     </div>
                     <button
-                        onClick={() => addToCart(product)}
+                        onClick={() => {
+                            addToCart(product);
+                            addedToCartAlert();
+                        }}
                         className='text-center mx-auto text-sm bg-orange-700 text-white transition hover:opacity-75 px-4 py-2 rounded-md shadow-md shadow-orange-400 tracking-wide w-1/3'>
                         Add to cart
                     </button>
+                    {alert && (
+                        <Transition
+                            show={toggleAlert}
+                            enter='transition ease-out duration-200'
+                            enterFrom='opacity-0 translate-y-1'
+                            enterTo='opacity-100 translate-y-0'
+                            leave='transition ease-in duration-150'
+                            leaveFrom='opacity-100 translate-y-0'
+                            leaveTo='opacity-0 translate-y-1'>
+                            <div className='rounded-lg bg-white overflow-hidden border border-slate-300 shadow-md shadow-slate-400 p-4 w-1/2 text-sm italic text-center mx-auto'>
+                                {alert}
+                            </div>
+                        </Transition>
+                    )}
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaLongArrowAltRight } from 'react-icons/fa';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CartContext } from '../contexts/CartContext';
 import { ProductsContext } from '../contexts/ProductsContext';
 
@@ -8,6 +8,7 @@ const CheckoutPage = () => {
     const { products } = useContext(ProductsContext);
     const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } =
         useContext(CartContext);
+    const navigate = useNavigate();
 
     return (
         <div className='rounded-lg bg-white overflow-hidden border border-slate-300 shadow-md shadow-slate-400 mx-6 my-14 md:mx-auto max-w-2xl items-center px-4 sm:px-6 lg:max-w-3xl lg:px-8'>
@@ -16,7 +17,11 @@ const CheckoutPage = () => {
                     <div className='text-lg font-medium text-gray-900'>
                         Shopping cart
                     </div>
-                    <button className='text-sm font-medium text-orange-600 hover:opacity-75' onClick={() => clearCart()}>Clear shopping cart</button>
+                    <button
+                        className='text-sm font-medium text-orange-600 hover:opacity-75'
+                        onClick={() => clearCart()}>
+                        Clear shopping cart
+                    </button>
                 </div>
 
                 <div className='mt-8'>
@@ -81,7 +86,6 @@ const CheckoutPage = () => {
                                                             }}>
                                                             +
                                                         </button>
-
                                                     </div>
                                                     {/* Remove from cart */}
                                                     <button
@@ -111,17 +115,21 @@ const CheckoutPage = () => {
                             <p>{getCartTotal()} SEK</p>
                         </div>
                         <div className='my-6 flex justify-center'>
-                            <Link
-                                to='#'
+                            <button
+                                onClick={() => {
+                                    clearCart();
+                                    navigate('/checkoutsuccessfull');
+                                    // <Navigate to="/checkoutsuccessfull" replace={true}/>
+                                }}
                                 className='text-center mx-auto text-sm bg-orange-700 text-white transition hover:opacity-75 px-4 py-2 rounded-md shadow-md shadow-orange-400 tracking-wide w-1/3'>
                                 Checkout
-                            </Link>
+                            </button>
                         </div>
                         <div className='mt-6 flex justify-center text-center text-sm text-gray-500'>
                             <span className='flex flex-nowrap gap-x-1 items-center'>
                                 <span>or</span>
                                 <Link
-                                    to='#'
+                                    to='/'
                                     className='font-medium text-orange-600 hover:underline'>
                                     Continue Shopping
                                 </Link>

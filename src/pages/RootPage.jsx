@@ -1,5 +1,10 @@
-// TODO: 1. Fixa varukorg för varje produkt som leder till en checkoutsida
-// TODO: 2. Skapa Skeleton när produkterna/API laddas
+// TODO:
+// 1. Meddelande vid lyckat köp
+// 2. Se till att man inte kan göra ett köp om varukorgen är tom
+// 3. Fixa plus-symboler vid produkterna (i ProductCard)
+// 4. Skapa Skeleton när produkterna/API laddas
+// 5. (Eventuellt) fixa så att alert körs varje gång 'Add To Cart' klickas på
+// 6. (Eventuellt) expandera checkout-popovern (i Navbar)
 
 import { Outlet, useLocation } from 'react-router-dom';
 

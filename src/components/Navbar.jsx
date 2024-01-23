@@ -35,11 +35,13 @@ const Navbar = () => {
                                 <Popover.Button>
                                     <span>
                                         <LuShoppingCart className='text-2xl outline-none' />
-                                        <span className='text-sm font-semibold absolute left-4 bottom-5 bg-red-400 h-6 w-6 rounded-full'>
-                                            <span className='absolute -translate-x-1 translate-y-0.5'>
-                                                {displayAmountOfItems()}
+                                        {displayAmountOfItems() > 0 && (
+                                            <span className='text-sm font-semibold absolute left-4 bottom-5 bg-red-400 h-6 w-6 rounded-full'>
+                                                <span className='absolute -translate-x-1 translate-y-0.5'>
+                                                    {displayAmountOfItems()}
+                                                </span>
                                             </span>
-                                        </span>
+                                        )}
                                     </span>
                                 </Popover.Button>
                                 <Transition
@@ -72,15 +74,6 @@ const Navbar = () => {
                             </>
                         )}
                     </Popover>
-                    {/* <Popover className='relative'>
-                        <Popover.Button className='text-2xl'><LuShoppingCart /></Popover.Button>
-
-                        <Popover.Panel className='absolute z-10'>
-                            <div className='grid grid-cols-1'>
-                                <Link to='/checkout'>Checkout</Link>
-                            </div>
-                        </Popover.Panel>
-                    </Popover> */}
                 </li>
             </ul>
         </div>
