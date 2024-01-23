@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 
 export const CartContext = createContext();
 
@@ -8,8 +8,7 @@ const CartContextProvider = ({ children }) => {
     const displayAmountOfItems = () => {
         return cartItems.reduce((total, item) => total + item.quantity, 0);
     };
-
-    console.log(displayAmountOfItems);
+    
     // Add items to cart
     const addToCart = (item) => {
         const isItemInCart = cartItems.find(

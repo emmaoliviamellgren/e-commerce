@@ -24,7 +24,7 @@ const Navbar = () => {
                 <li>
                     <NavLink
                         to='/checkout'
-                        className='text-2xl'>
+                        className='text-2xl transition hover:text-orange-700'>
                         <FaUser />
                     </NavLink>
                 </li>
@@ -34,12 +34,12 @@ const Navbar = () => {
                             <>
                                 <Popover.Button>
                                     <span>
-                                        <LuShoppingCart className='text-2xl outline-none' />
+                                        <LuShoppingCart className='text-2xl outline-none transition hover:text-orange-700' />
                                         {displayAmountOfItems() > 0 && (
-                                            <span className='text-sm font-semibold absolute left-4 bottom-5 bg-red-400 h-6 w-6 rounded-full'>
-                                                <span className='absolute -translate-x-1 translate-y-0.5'>
+                                            <span className='absolute bottom-3'>
+                                            <span className='text-sm font-semibold bg-red-400 bg-opacity-50 w-[40px] text-center rounded-full inline-block mr-[5px] leading-[40px]'>
                                                     {displayAmountOfItems()}
-                                                </span>
+                                            </span>
                                             </span>
                                         )}
                                     </span>

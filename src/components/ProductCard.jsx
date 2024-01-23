@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
                     </h3>
                 </Link>
                 <p className='pt-2 text-lg font-semibold text-gray-900'>
-                    {product.price}
+                    {product.price} <span className='font-medium text-sm'>sek</span>
                 </p>
             </div>
             <div className='mb-12'>
