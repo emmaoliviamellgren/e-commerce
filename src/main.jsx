@@ -3,20 +3,30 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+// Layouts
+import PublicLayout from './layouts/PublicLayout';
+import AuthLayout from './layouts/AuthLayout';
+
 // Pages
-import RootPage from './pages/RootPage';
+import HomePage from './pages/HomePage';
 import ErrorPage from './pages/ErrorPage';
 import ContactPage from './pages/ContactPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import CheckoutPage from './pages/CheckoutPage';
 import CheckoutSuccessfulPage from './pages/CheckoutSuccessfulPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <RootPage />,
+        element: <PublicLayout />,
         errorElement: <ErrorPage />,
         children: [
+            {
+                index: true,
+                element: <HomePage />,
+            },
             {
                 path: 'contact',
                 element: <ContactPage />,
@@ -32,9 +42,23 @@ const router = createBrowserRouter([
             {
                 path: 'checkoutsuccessfull',
                 element: <CheckoutSuccessfulPage />,
-            }
+            },
         ],
-    }
+    },
+    {
+        path: 'auth',
+        element: <AuthLayout />,
+        children: [
+            {
+                path: 'login',
+                element: <LoginPage />,
+            },
+            {
+                path: 'register',
+                element: <RegisterPage />,
+            },
+        ],
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

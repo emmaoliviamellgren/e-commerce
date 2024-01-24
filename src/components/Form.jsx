@@ -58,7 +58,7 @@ const Form = () => {
     });
 
     return (
-        <div className='mx-auto my-20 w-[28rem] lg:w-[60rem] px-16 xl:px-56 py-20 border border-slate-300 shadow-md shadow-slate-400 bg-white rounded-lg mx'>
+        <div className='mx-auto my-20 w-[28rem] lg:w-[60rem] px-16 xl:px-56 py-20 border border-slate-300 shadow-md shadow-slate-400 bg-white rounded-lg'>
             <form
                 onSubmit={form.handleSubmit}
                 className='flex justify-center flex-col wrap w-full gap-2'>

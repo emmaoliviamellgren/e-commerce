@@ -43,6 +43,7 @@ const FilterByCategory = () => {
                                     {categories &&
                                         categories.map((category) => (
                                             <button
+                                                key={category}
                                                 onClick={() => {
                                                     if (
                                                         selectedCategories.includes(
