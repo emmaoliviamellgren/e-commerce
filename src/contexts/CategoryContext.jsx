@@ -16,6 +16,7 @@ const CategoryContextProvider = ({ children }) => {
             fetch(API_KEY)
                 .then((response) => response.json())
                 .then((data) => {
+                    // Using Set constructor to remove category duplicates
                     const categoryList = [...new Set(data.map(item => item.category))];
                     setCategories(categoryList);
                 });

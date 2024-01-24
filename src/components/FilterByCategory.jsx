@@ -38,7 +38,7 @@ const FilterByCategory = () => {
                             leave='transition ease-in duration-150'
                             leaveFrom='opacity-100 translate-y-0'
                             leaveTo='opacity-0 translate-y-1'>
-                            <Popover.Panel className='absolute -left-8 top-full z-10 mt-3 w-screen max-w-sm overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-gray-900/5'>
+                            <Popover.Panel className='absolute -left-8 top-full z-10 mt-3 md:w-screen max-w-sm overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-gray-900/5'>
                                 <div className='p-4'>
                                     {categories &&
                                         categories.map((category) => (
@@ -56,7 +56,7 @@ const FilterByCategory = () => {
                                                         addCategory(category);
                                                     }
                                                 }}
-                                                className={`m-2 px-5 py-2 inline-flex justify-center items-center text-sm border rounded-full border-slate-300 transition-all duration-300 ${
+                                                className={`m-2 px-5 py-2 inline-flex justify-center items-center text-sm border rounded-md border-slate-300 transition-all duration-300 ${
                                                     selectedCategories.includes(
                                                         category
                                                     )
@@ -66,6 +66,15 @@ const FilterByCategory = () => {
                                                 {category}
                                             </button>
                                         ))}
+                                    <div className='border-t mt-2'>
+                                            <button
+                                                className='text-orange-700 hover:underline mt-2 ml-2'
+                                                onClick={() =>
+                                                    resetCategories()
+                                                }>
+                                                Clear all filters
+                                            </button>
+                                    </div>
                                 </div>
                             </Popover.Panel>
                         </Transition>

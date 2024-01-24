@@ -35,7 +35,7 @@ function Root() {
                                 <h1 className='text-3xl mb-2'>
                                     Shop our products
                                 </h1>
-                                <p>Browse the collection</p>
+                                <p>Browse the collection...</p>
                             </div>
 
                             <FilterByCategory />
