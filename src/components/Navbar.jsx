@@ -53,7 +53,7 @@ const Navbar = () => {
                                                     to='/auth/register'
                                                     className='text-sm font-semibold transition outline-none hover:text-orange-700 flex flex-row gap-x-2 items-center justify-center'>
                                                     <FiLogIn className='text-xl'/>
-                                                    <p>Register</p>
+                                                    <p>Sign up</p>
                                                 </NavLink>
                                             </div>
                                         </div>
