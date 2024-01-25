@@ -4,18 +4,18 @@ import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Layouts
-import PublicLayout from './layouts/PublicLayout';
-import AuthLayout from './layouts/AuthLayout';
+import PublicLayout from './app/public/PublicLayout';
+import AuthLayout from './app/auth/AuthLayout';
 
 // Pages
-import HomePage from './pages/HomePage';
-import ErrorPage from './pages/ErrorPage';
-import ContactPage from './pages/ContactPage';
-import ProductDetailsPage from './pages/ProductDetailsPage';
-import CheckoutPage from './pages/CheckoutPage';
-import CheckoutSuccessfulPage from './pages/CheckoutSuccessfulPage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
+import HomePage from './app/public/HomePage';
+import ErrorPage from './app/public/ErrorPage';
+import ContactPage from './app/public/ContactPage';
+import ProductDetailsPage from './app/public/ProductDetailsPage';
+import CheckoutPage from './app/public/CheckoutPage';
+import CheckoutSuccessfulPage from './app/public/CheckoutSuccessfulPage';
+import LoginPage from './app/auth/LoginPage';
+import RegisterPage from './app/auth/RegisterPage';
 
 const router = createBrowserRouter([
     {

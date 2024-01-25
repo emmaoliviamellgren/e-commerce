@@ -1,8 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
 import { useContext, useEffect, useState } from 'react';
-import { ProductsContext } from '../contexts/ProductsContext';
-import { CartContext } from '../contexts/CartContext';
+import { ProductsContext } from '../../contexts/ProductsContext';
+import { CartContext } from '../../contexts/CartContext';
 import { Transition } from '@headlessui/react';
 
 const ProductDetailsPage = () => {
@@ -19,7 +19,7 @@ const ProductDetailsPage = () => {
 
     // Alert when add to cart button is clicked
     const [alert, setAlert] = useState(null);
-    const [toggleAlert, setToggleAlert] = useState(false)
+    const [toggleAlert, setToggleAlert] = useState(false);
 
     useEffect(() => {
         if (alert) {

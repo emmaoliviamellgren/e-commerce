@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { useContext, useState } from 'react';
-import { CartContext } from '../contexts/CartContext';
-import { ProductsContext } from '../contexts/ProductsContext';
+import { CartContext } from '../../contexts/CartContext';
+import { ProductsContext } from '../../contexts/ProductsContext';
 
 const CheckoutPage = () => {
     const { products } = useContext(ProductsContext);
