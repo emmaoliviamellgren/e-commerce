@@ -7,9 +7,8 @@
 
 // Components
 import Hero from '../../components/Hero';
-
 import ProductGrid from '../../components/ProductGrid';
-import FilterByCategory from '../../components/FilterByCategory';
+import FilterByCategory from '../../features/FilterByCategory';
 
 function HomePage() {
     return (
