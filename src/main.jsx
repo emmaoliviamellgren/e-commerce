@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // Layouts
 import PublicLayout from './app/public/PublicLayout';
 import AuthLayout from './app/auth/AuthLayout';
+import PrivateLayout from './app/private/PrivateLayout';
 
 // Pages
 import HomePage from './app/public/HomePage';
@@ -16,6 +17,7 @@ import CheckoutPage from './app/public/CheckoutPage';
 import CheckoutSuccessfulPage from './app/public/CheckoutSuccessfulPage';
 import LoginPage from './app/auth/LoginPage';
 import RegisterPage from './app/auth/RegisterPage';
+import OrderHistoryPage from './app/private/OrderHistoryPage';
 
 const router = createBrowserRouter([
     {
@@ -57,6 +59,16 @@ const router = createBrowserRouter([
                 path: 'register',
                 element: <RegisterPage />,
             },
+        ],
+    },
+    {
+        path: 'private',
+        element: <PrivateLayout />,
+        children: [
+            {
+                path: 'orderhistory',
+                element: <OrderHistoryPage />,
+            }
         ],
     },
 ]);

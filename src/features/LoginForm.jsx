@@ -19,7 +19,7 @@ const LoginForm = () => {
                 .required('Required'),
         }),
         onSubmit: (values) => {
-            postData(values);
+            console.log(values);
         },
     });
 

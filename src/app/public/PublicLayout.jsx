@@ -13,9 +13,9 @@ const PublicLayout = () => {
         <CartContextProvider>
             <ProductsContextProvider>
                 <CategoryContextProvider>
-                    <Navbar />
-                    <Outlet />
-                    <Footer />
+                        <Navbar />
+                        <Outlet />
+                        <Footer />
                 </CategoryContextProvider>
             </ProductsContextProvider>
         </CartContextProvider>

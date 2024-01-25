@@ -23,7 +23,7 @@ const RegisterForm = () => {
             ),
         }),
         onSubmit: (values) => {
-            postData(values);
+            console.log(values);
         },
     });
 
