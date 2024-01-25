@@ -6,12 +6,12 @@
 // 5. (EV) expandera checkout-popovern (i Navbar)
 
 // Components
-import Hero from '../components/Hero';
-import ProductGrid from '../components/ProductGrid';
-import FilterByCategory from '../components/FilterByCategory';
+import Hero from '../../components/Hero';
+
+import ProductGrid from '../../components/ProductGrid';
+import FilterByCategory from '../../components/FilterByCategory';
 
 function HomePage() {
-
     return (
         <>
             <Hero />

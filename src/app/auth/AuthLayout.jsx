@@ -1,12 +1,12 @@
 // Contexts
-import ProductsContextProvider from '../contexts/ProductsContext';
-import CartContextProvider from '../contexts/CartContext';
-import CategoryContextProvider from '../contexts/CategoryContext';
+import ProductsContextProvider from '../../contexts/ProductsContext';
+import CartContextProvider from '../../contexts/CartContext';
+import CategoryContextProvider from '../../contexts/CategoryContext';
 import { Outlet } from 'react-router-dom';
 
 // Components
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
+import Footer from '../../components/Footer';
+import Navbar from '../../components/Navbar';
 
 const AuthLayout = () => {
     return (
