@@ -1,13 +1,22 @@
 import { FaExclamationCircle } from 'react-icons/fa';
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { useAuth, AuthContext } from '../contexts/AuthContext';
+import { useState } from 'react';
 
 const RegisterForm = () => {
+    const navigate = useNavigate();
+    const { register } = useAuth(AuthContext);
+
+    const [error, setError] = useState(null)
+    const [success, setSuccess] = useState(null)
+
     const form = useFormik({
         initialValues: {
             email: '',
             password: '',
+            confirmPassword: '',
         },
         validationSchema: Yup.object({
             email: Yup.string()
@@ -23,8 +32,16 @@ const RegisterForm = () => {
             ),
         }),
         onSubmit: (values) => {
-            console.log(values);
-        },
+            register(values)
+                .then(() => {
+                    form.resetForm();
+                    console.log('Registration successful!');
+                    navigate('/');
+                })
+                .catch(error => {
+                    console.log('Registration failed: ', error);
+                });
+        }
     });
 
     return (

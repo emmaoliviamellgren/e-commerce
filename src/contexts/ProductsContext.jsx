@@ -10,8 +10,7 @@ const ProductsContextProvider = ({ children }) => {
         fetch(API_KEY)
             .then((response) => {
                 if (!response.ok) {
-                    console.log('Something went wrong.' + response.status);
-                    return;
+                    throw new Error('Something went wrong')
                 }
                 return response.json();
             })
