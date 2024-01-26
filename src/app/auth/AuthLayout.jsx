@@ -1,29 +1,26 @@
-import { Outlet } from 'react-router-dom';
-
-// Contexts
-import ProductsContextProvider from '../../contexts/ProductsContext';
-import CartContextProvider from '../../contexts/CartContext';
-import CategoryContextProvider from '../../contexts/CategoryContext';
-import AuthContextProvider from '../../contexts/AuthContext';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import RootLayout from '../../RootLayout';
 
 // Components
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 
 const AuthLayout = () => {
+    // const { token } = useAuth();
+    // const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     if (token) {
+    //         navigate('/private');
+    //     }
+    // }, [token]);
+
     return (
         <>
-        <AuthContextProvider>
-            <CartContextProvider>
-                <ProductsContextProvider>
-                    <CategoryContextProvider>
-                        <Navbar />
-                        <Outlet />
-                        <Footer />
-                    </CategoryContextProvider>
-                </ProductsContextProvider>
-            </CartContextProvider>
-            </AuthContextProvider>
+            <Navbar />
+            <Outlet />
+            <Footer />
         </>
     );
 };

@@ -2,8 +2,10 @@ import { FaExclamationCircle } from 'react-icons/fa';
 import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { useAuth, AuthContext } from '../contexts/AuthContext';
 import { useState } from 'react';
+
+// Contexts
+import { useAuth, AuthContext } from '../contexts/AuthContext';
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -36,7 +38,7 @@ const RegisterForm = () => {
                 .then(() => {
                     form.resetForm();
                     console.log('Registration successful!');
-                    navigate('/');
+                    navigate('/private');
                 })
                 .catch(error => {
                     console.log('Registration failed: ', error);

@@ -1,11 +1,12 @@
+import { useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
-import { useContext } from 'react';
-import { ProductsContext } from '../../contexts/ProductsContext';
-import { CartContext } from '../../contexts/CartContext';
-
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+// Contexts
+import { ProductsContext } from '../../contexts/ProductsContext';
+import { CartContext } from '../../contexts/CartContext';
 
 const ProductDetailsPage = () => {
     const { products } = useContext(ProductsContext);
@@ -24,7 +25,6 @@ const ProductDetailsPage = () => {
     }
 
     // Alert when add to cart button is clicked
-
     const alert = () =>
         toast('Item added to cart!', {
             position: 'top-center',

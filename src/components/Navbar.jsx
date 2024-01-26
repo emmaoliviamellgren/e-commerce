@@ -7,11 +7,13 @@ import { Fragment, useContext, useState } from 'react';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { SiSinglestore } from 'react-icons/si';
 import { LuShoppingCart } from 'react-icons/lu';
-import { FiLogIn } from "react-icons/fi";
+import { FiLogIn } from 'react-icons/fi';
+import { AuthContext, useAuth } from '../contexts/AuthContext';
 
 const Navbar = () => {
     const { cartItems, addToCart, displayAmountOfItems } =
         useContext(CartContext);
+    const { token, logout } = useAuth(AuthContext);
 
     return (
         <div className='w-full flex items-center justify-around h-24 border-b border-slate-300'>
@@ -45,14 +47,14 @@ const Navbar = () => {
                                                 <NavLink
                                                     to='/auth/login'
                                                     className='text-sm font-semibold transition outline-none hover:text-orange-700 flex flex-row gap-x-2 items-center justify-center'>
-                                                    <FiLogIn className='text-xl'/>
+                                                    <FiLogIn className='text-xl' />
                                                     <p>Log in</p>
                                                 </NavLink>
                                                 <div className='border-b my-1'></div>
                                                 <NavLink
                                                     to='/auth/register'
                                                     className='text-sm font-semibold transition outline-none hover:text-orange-700 flex flex-row gap-x-2 items-center justify-center'>
-                                                    <FiLogIn className='text-xl'/>
+                                                    <FiLogIn className='text-xl' />
                                                     <p>Sign up</p>
                                                 </NavLink>
                                             </div>
@@ -110,6 +112,11 @@ const Navbar = () => {
                         )}
                     </Popover>
                 </li>
+                {token && (
+                    <li>
+                        <button onClick={logout}>Log out</button>
+                    </li>
+                )}
             </ul>
         </div>
     );

@@ -1,55 +1,87 @@
-import { createContext, useContext, useState } from "react"
+import { useContext, createContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const AuthContext = createContext()
+export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
+    const [token, setToken] = useState(null);
+    const navigate = useNavigate()
 
-  const [token, setToken] = useState(null)
+    // Register new account
+    const register = (formData) => {
+        return fetch('https://js2-ecommerce-api.vercel.app/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+            .then((response) => {
+                if (response.status !== 201) {
+                    throw new Error(response.status);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setToken(data.token);
+                localStorage.setItem('accessToken', data.token);
+                console.log('localStorage set with token value: ' + data.token)
+            })
+            .catch((error) => {
+                console.log(
+                    'There was a problem with creating your account.',
+                    error
+                );
+            });
+    };
 
-  const register = (formData) => {
-    return fetch('https://js2-ecommerce-api.vercel.app/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(res => {
-      console.log(res);
-      if(res.status !== 201) {
-          throw new Error(data);
-      }
-      return res.json();
-    })
-    .then(data => {
-      console.log(data);
-      setToken(data.token);
-      return { success: 'User created' };
-    })
-    .catch(error => {
-      return { error: error.message };
-    });
-  }
+    // Log in to existing account
+    const login = (formData) => {
+        return fetch('https://js2-ecommerce-api.vercel.app/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(response.status);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setToken(data.token);
+                localStorage.getItem('accessToken', data.token);
+                console.log('localStorage set with token value: ' + data.token)
+            })
+            .catch((error) => {
+                console.log(
+                    'There was a problem when logging in to your account.',
+                    error
+                );
+            });
+    };
 
-  const value = {
-    token,
-    register
-  }
+    // Log out
+    const logout = () => {
+        localStorage.removeItem('accessToken');
+        navigate('/')
+    };
 
-  return (
-    <AuthContext.Provider value={ value }>
-      { children }
-    </AuthContext.Provider>
-  )
-}
+    return (
+        <AuthContext.Provider value={{ token, register, login, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
 
-export default AuthContextProvider
+export default AuthContextProvider;
 
-// useAuth hook
 export const useAuth = () => {
 
-  const context = useContext(AuthContext)
-  if (!context) throw new Error('useAuth must be used inside an AuthContextProvider')
-  return context
+    const context = useContext(AuthContext)
+    if (!context) throw new Error('useAuth must be used inside an AuthContextProvider')
+    return context
 
 }

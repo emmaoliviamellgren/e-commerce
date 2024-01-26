@@ -1,9 +1,20 @@
 import { FaExclamationCircle } from 'react-icons/fa';
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { useState } from 'react';
+
+// Contexts
+import { useAuth, AuthContext } from '../contexts/AuthContext'
 
 const LoginForm = () => {
+
+    const navigate = useNavigate();
+    const { login } = useAuth(AuthContext);
+
+    const [error, setError] = useState(null)
+    const [success, setSuccess] = useState(null)
+
     const form = useFormik({
         initialValues: {
             email: '',
@@ -19,8 +30,16 @@ const LoginForm = () => {
                 .required('Required'),
         }),
         onSubmit: (values) => {
-            console.log(values);
-        },
+            login(values)
+                .then(() => {
+                    form.resetForm();
+                    console.log('Log in successful!');
+                    navigate('/private');
+                })
+                .catch(error => {
+                    console.log('Couldn\'t log user in. ', error);
+                });
+        }
     });
 
     return (
