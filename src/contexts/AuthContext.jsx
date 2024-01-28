@@ -59,7 +59,9 @@ const AuthContextProvider = ({ children }) => {
                 if (data.token) {
                     localStorage.setItem('accessToken', data.token);
                     setToken(data.token); // update the token in the state
-                    console.log('localStorage set with token value: ' + data.token);
+                    console.log(
+                        'localStorage set with token value: ' + data.token
+                    );
                 }
             })
             .catch((error) => {
@@ -72,9 +74,11 @@ const AuthContextProvider = ({ children }) => {
 
     // Log out
     const logout = () => {
-        localStorage.removeItem('accessToken');
-        setToken(null);
-        navigate('/');
+        if (token !== null) {
+            localStorage.removeItem('accessToken');
+            setToken(null);
+            navigate('/');
+        }
     };
 
     return (

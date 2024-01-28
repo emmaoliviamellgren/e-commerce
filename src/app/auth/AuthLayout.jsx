@@ -7,18 +7,19 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 
 const AuthLayout = () => {
-    const { token } = useAuth();
-    const navigate = useNavigate();
+    // const { token } = useAuth();
+    // const navigate = useNavigate();
 
-    useEffect(() => {
-        if (token) {
-            navigate('/private');
-        }
-    }, [token]);
+    // useEffect(() => {
+    //     if (token) {
+    //         navigate('/private');
+    //     }
+    // }, [token]);
 
     return (
         <>
             <Navbar />
+            <div className='text-black font-bold text-2xl'>Dashboard</div>
             <Outlet />
             <Footer />
         </>

@@ -11,8 +11,8 @@ const RegisterForm = () => {
     const navigate = useNavigate();
     const { register } = useAuth(AuthContext);
 
-    const [error, setError] = useState(null)
-    const [success, setSuccess] = useState(null)
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
 
     const form = useFormik({
         initialValues: {
@@ -40,10 +40,10 @@ const RegisterForm = () => {
                     console.log('Registration successful!');
                     navigate('/private');
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.log('Registration failed: ', error);
                 });
-        }
+        },
     });
 
     return (

@@ -13,10 +13,13 @@ const PrivateLayout = () => {
     const { token } = useAuth(AuthContext);
 
     useEffect(() => {
-        if (!token) {
-            navigate('/auth/login');
+        if (token) {
+            console.log('Log in successful!');
+            navigate('/private');
+        } else {
+            setError('Couldn\'t log user in.');
         }
-    }, [token]);
+    }, [token, navigate]);
 
     return (
         <>

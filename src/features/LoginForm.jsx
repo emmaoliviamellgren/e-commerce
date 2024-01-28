@@ -10,7 +10,7 @@ import { useAuth, AuthContext } from '../contexts/AuthContext'
 const LoginForm = () => {
 
     const navigate = useNavigate();
-    const { login } = useAuth(AuthContext);
+    const { login, token } = useAuth(AuthContext);
 
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
@@ -39,8 +39,7 @@ const LoginForm = () => {
                 .catch(error => {
                     console.log('Couldn\'t log user in. ', error);
                 });
-        }
-    });
+        }})
 
     return (
         <div>

@@ -1,3 +1,11 @@
+// TODO:
+// 1. När en användare har loggat in eller registrerat ett konto så kommer API:et skicka en Användar-objekt tillbaka med uppgifter om användaren samt en Token som är unik för just den inloggningen och är kopplad till användaren. Detta behöver du spara för att kunna använda vid senare tillfällen.
+// 401 UNAUHTORIZED RETURNERA ACCESSTOKEN VALUE INCORRECT EMAIL OR PASSWORD
+// 2. (EV) Fixa plus-symboler vid produkterna (i ProductCard)
+// 3. (EV) Skapa Skeleton när produkterna/API laddas
+// 4. (EV) fixa så att alert körs varje gång 'Add To Cart' klickas på
+// 5. (EV) expandera checkout-popovern (i Navbar)
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
