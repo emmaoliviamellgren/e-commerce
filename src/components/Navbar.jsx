@@ -1,19 +1,42 @@
 import { Popover, Transition } from '@headlessui/react';
 import { NavLink } from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useContext, useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
 // Icons
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { SiSinglestore } from 'react-icons/si';
 import { LuShoppingCart } from 'react-icons/lu';
 import { FiLogIn } from 'react-icons/fi';
-import { AuthContext, useAuth } from '../contexts/AuthContext';
 
 const Navbar = () => {
     const { cartItems, addToCart, displayAmountOfItems } =
         useContext(CartContext);
-    const { token, logout } = useAuth(AuthContext);
+    const { token, setToken, logout } = useAuth();
+
+    // console.log(token)
+
+    // useEffect(() => {
+    //     const storedToken = localStorage.getItem('accessToken');
+    //     if (storedToken === null) {
+    //         setToken(storedToken);
+    //     } else if(storedToken !== null){
+    //         localStorage.removeItem('accessToken');
+    //     }
+    // }, []);
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('accessToken');
+        if (storedToken) {
+            setToken(storedToken);
+        }
+    }, []);
+
+
+    useEffect(() => {
+        if (token) localStorage.setItem('accessToken', token);
+    }, [token]);
 
     return (
         <div className='w-full flex items-center justify-around h-24 border-b border-slate-300'>
@@ -112,9 +135,9 @@ const Navbar = () => {
                         )}
                     </Popover>
                 </li>
-                {token && (
+                {token !== null && (
                     <li>
-                        <button onClick={logout}>Log out</button>
+                        <button onClick={() => logout()}>Log out</button>
                     </li>
                 )}
             </ul>

@@ -5,7 +5,9 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
     const [token, setToken] = useState(null);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    console.log(token);
 
     // Register new account
     const register = (formData) => {
@@ -23,9 +25,11 @@ const AuthContextProvider = ({ children }) => {
                 return response.json();
             })
             .then((data) => {
-                setToken(data.token);
-                localStorage.setItem('accessToken', data.token);
-                console.log('localStorage set with token value: ' + data.token)
+                if (data.token) {
+                    localStorage.getItem('accessToken', data.token);
+                    setToken(data.token); // update the token in the state
+                }
+                console.log('localStorage set with token value: ' + data.token);
             })
             .catch((error) => {
                 console.log(
@@ -36,6 +40,7 @@ const AuthContextProvider = ({ children }) => {
     };
 
     // Log in to existing account
+
     const login = (formData) => {
         return fetch('https://js2-ecommerce-api.vercel.app/api/auth/login', {
             method: 'POST',
@@ -51,9 +56,11 @@ const AuthContextProvider = ({ children }) => {
                 return response.json();
             })
             .then((data) => {
-                setToken(data.token);
-                localStorage.getItem('accessToken', data.token);
-                console.log('localStorage set with token value: ' + data.token)
+                if (data.token) {
+                    localStorage.setItem('accessToken', data.token);
+                    setToken(data.token); // update the token in the state
+                    console.log('localStorage set with token value: ' + data.token);
+                }
             })
             .catch((error) => {
                 console.log(
@@ -66,11 +73,13 @@ const AuthContextProvider = ({ children }) => {
     // Log out
     const logout = () => {
         localStorage.removeItem('accessToken');
-        navigate('/')
+        setToken(null);
+        navigate('/');
     };
 
     return (
-        <AuthContext.Provider value={{ token, register, login, logout }}>
+        <AuthContext.Provider
+            value={{ token, setToken, register, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
@@ -79,9 +88,8 @@ const AuthContextProvider = ({ children }) => {
 export default AuthContextProvider;
 
 export const useAuth = () => {
-
-    const context = useContext(AuthContext)
-    if (!context) throw new Error('useAuth must be used inside an AuthContextProvider')
-    return context
-
-}
+    const context = useContext(AuthContext);
+    if (!context)
+        throw new Error('useAuth must be used inside an AuthContextProvider');
+    return context;
+};
