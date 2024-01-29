@@ -7,7 +7,37 @@ const AuthContextProvider = ({ children }) => {
     const [token, setToken] = useState(null);
     const navigate = useNavigate();
 
-    console.log(token);
+    // Log in to existing account
+    const login = (formData) => {
+        return fetch('https://js2-ecommerce-api.vercel.app/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+            .then((response) => {
+                if (response.status !== 200) {
+                    throw new Error(response.status);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data.token && formData) {
+                    localStorage.setItem('accessToken', data.token);
+                    setToken(data.token);
+                } else {
+                    localStorage.removeItem('accessToken');
+                    setToken(null);
+                }
+            })
+            .catch((error) => {
+                console.log(
+                    'There was a problem when logging in to your account.',
+                    error
+                );
+            });
+    };
 
     // Register new account
     const register = (formData) => {
@@ -27,7 +57,7 @@ const AuthContextProvider = ({ children }) => {
             .then((data) => {
                 if (data.token) {
                     localStorage.getItem('accessToken', data.token);
-                    setToken(data.token); // update the token in the state
+                    setToken(data.token);
                 }
                 console.log('localStorage set with token value: ' + data.token);
             })
@@ -39,46 +69,12 @@ const AuthContextProvider = ({ children }) => {
             });
     };
 
-    // Log in to existing account
-
-    const login = (formData) => {
-        return fetch('https://js2-ecommerce-api.vercel.app/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(response.status);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                if (data.token) {
-                    localStorage.setItem('accessToken', data.token);
-                    setToken(data.token); // update the token in the state
-                    console.log(
-                        'localStorage set with token value: ' + data.token
-                    );
-                }
-            })
-            .catch((error) => {
-                console.log(
-                    'There was a problem when logging in to your account.',
-                    error
-                );
-            });
-    };
-
     // Log out
     const logout = () => {
-        if (token !== null) {
-            localStorage.removeItem('accessToken');
-            setToken(null);
-            navigate('/');
-        }
+        setToken(null);
+        localStorage.removeItem('accessToken');
+        localStorage.clear();
+        navigate('/');
     };
 
     return (

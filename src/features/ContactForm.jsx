@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import * as Yup from 'yup';
 
-const Form = () => {
+const ContactForm = () => {
     // Error message
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
@@ -162,4 +162,4 @@ const Form = () => {
         </div>
     );
 };
-export default Form;
+export default ContactForm;

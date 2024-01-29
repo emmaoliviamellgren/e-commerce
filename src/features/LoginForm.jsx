@@ -1,19 +1,17 @@
 import { FaExclamationCircle } from 'react-icons/fa';
+import { MdError } from 'react-icons/md';
 import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useState } from 'react';
 
 // Contexts
-import { useAuth, AuthContext } from '../contexts/AuthContext'
+import { useAuth, AuthContext } from '../contexts/AuthContext';
 
 const LoginForm = () => {
-
     const navigate = useNavigate();
     const { login, token } = useAuth(AuthContext);
-
-    const [error, setError] = useState(null)
-    const [success, setSuccess] = useState(null)
+    const [error, setError] = useState(null);
 
     const form = useFormik({
         initialValues: {
@@ -36,10 +34,14 @@ const LoginForm = () => {
                     console.log('Log in successful!');
                     navigate('/private');
                 })
-                .catch(error => {
-                    console.log('Couldn\'t log user in. ', error);
+                .catch((error) => {
+                    if (error.response.status === 401) {
+                        setError('Invalid email or password.');
+                    }
+                    console.log("Couldn't log user in. ", error);
                 });
-        }})
+        },
+    });
 
     return (
         <div>
@@ -116,6 +118,13 @@ const LoginForm = () => {
                         Sign up
                     </Link>
                 </p>
+
+                {error && (
+                    <div className='flex items-center justify-evenly text-sm border border-red-200 w-72 mx-auto mt-6 py-2 bg-red-100'>
+                        <MdError />
+                        <p>{error}</p>
+                    </div>
+                )}
             </div>
         </div>
     );

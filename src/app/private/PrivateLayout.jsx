@@ -14,10 +14,9 @@ const PrivateLayout = () => {
 
     useEffect(() => {
         if (token) {
-            console.log('Log in successful!');
             navigate('/private');
         } else {
-            setError('Couldn\'t log user in.');
+            navigate('/auth/login');
         }
     }, [token, navigate]);
 
