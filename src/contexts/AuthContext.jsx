@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
     const [token, setToken] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null)
     const navigate = useNavigate();
 
     // Log in to existing account
@@ -17,25 +18,30 @@ const AuthContextProvider = ({ children }) => {
             body: JSON.stringify(formData),
         })
             .then((response) => {
-                if (response.status !== 200) {
-                    throw new Error(response.status);
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error(response.status)
                 }
-                return response.json();
             })
             .then((data) => {
                 if (data.token && formData) {
                     localStorage.setItem('accessToken', data.token);
                     setToken(data.token);
-                } else {
-                    localStorage.removeItem('accessToken');
-                    setToken(null);
+                    setErrorMsg(null);
                 }
             })
             .catch((error) => {
-                console.log(
-                    'There was a problem when logging in to your account.',
-                    error
-                );
+                if (error.message === '401') {
+                    setErrorMsg('Invalid')
+                }
+                else {
+                    setErrorMsg('Something went wrong')
+                    console.log(
+                        'There was a problem when logging in to your account.',
+                        error
+                    );
+                }
             });
     };
 
@@ -55,11 +61,11 @@ const AuthContextProvider = ({ children }) => {
                 return response.json();
             })
             .then((data) => {
-                if (data.token) {
+                if (data.token && formData) {
                     localStorage.getItem('accessToken', data.token);
+                    localStorage.setItem('accessToken', data.token);
                     setToken(data.token);
                 }
-                console.log('localStorage set with token value: ' + data.token);
             })
             .catch((error) => {
                 console.log(
@@ -79,7 +85,13 @@ const AuthContextProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider
-            value={{ token, setToken, register, login, logout }}>
+            value={{
+                token,
+                setToken,
+                register,
+                login,
+                logout,
+                errorMsg }}>
             {children}
         </AuthContext.Provider>
     );

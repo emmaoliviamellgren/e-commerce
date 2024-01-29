@@ -1,8 +1,6 @@
-import { NavLink } from 'react-router-dom';
-import { useContext } from 'react';
-import { CartContext } from '../contexts/CartContext';
-import { useAuth } from '../contexts/AuthContext';
 import { SiSinglestore } from 'react-icons/si';
+import { NavLink } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import ShoppingCartButton from './ShoppingCartButton';
 import UserButton from './UserButton';
 import UserButtonLoggedIn from './UserButtonLoggedIn';

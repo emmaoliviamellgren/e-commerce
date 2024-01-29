@@ -10,8 +10,7 @@ import { useAuth, AuthContext } from '../contexts/AuthContext';
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const { login, token } = useAuth(AuthContext);
-    const [error, setError] = useState(null);
+    const { login, errorMsg } = useAuth(AuthContext);
 
     const form = useFormik({
         initialValues: {
@@ -30,14 +29,11 @@ const LoginForm = () => {
         onSubmit: (values) => {
             login(values)
                 .then(() => {
-                    form.resetForm();
-                    console.log('Log in successful!');
-                    navigate('/private');
+                        form.resetForm();
+                        console.log('Log in successful!');
+                        navigate('/private');
                 })
                 .catch((error) => {
-                    if (error.response.status === 401) {
-                        setError('Invalid email or password.');
-                    }
                     console.log("Couldn't log user in. ", error);
                 });
         },
@@ -119,10 +115,10 @@ const LoginForm = () => {
                     </Link>
                 </p>
 
-                {error && (
+                {errorMsg && (
                     <div className='flex items-center justify-evenly text-sm border border-red-200 w-72 mx-auto mt-6 py-2 bg-red-100'>
                         <MdError />
-                        <p>{error}</p>
+                        <p>{errorMsg}</p>
                     </div>
                 )}
             </div>

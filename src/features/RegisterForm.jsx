@@ -11,9 +11,6 @@ const RegisterForm = () => {
     const navigate = useNavigate();
     const { register } = useAuth(AuthContext);
 
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
-
     const form = useFormik({
         initialValues: {
             email: '',

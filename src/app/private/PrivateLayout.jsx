@@ -23,7 +23,7 @@ const PrivateLayout = () => {
     return (
         <>
             <Navbar />
-            <p className='text-3xl text-center font-bold'>PRIVATE</p>
+            <h1 className='text-2xl text-center font-bold p-12'>Dashboard</h1>
             <OrderHistoryPage />
             <Outlet />
             <Footer />
