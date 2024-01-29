@@ -1,16 +1,30 @@
 import { FaExclamationCircle } from 'react-icons/fa';
-import { MdError } from 'react-icons/md';
 import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { ToastContainer, Bounce, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Contexts
 import { useAuth, AuthContext } from '../contexts/AuthContext';
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const { login, errorMsg } = useAuth(AuthContext);
+    const { login } = useAuth(AuthContext);
+
+    // Alert when invalid email or password
+    const alertToast = () =>
+        toast('Invalid email or password.', {
+            position: 'top-center',
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+            transition: Bounce,
+        });
 
     const form = useFormik({
         initialValues: {
@@ -29,11 +43,14 @@ const LoginForm = () => {
         onSubmit: (values) => {
             login(values)
                 .then(() => {
-                        form.resetForm();
-                        console.log('Log in successful!');
-                        navigate('/private');
+                    form.resetForm();
+                    console.log('Log in successful!');
+                    navigate('/private');
                 })
                 .catch((error) => {
+                    if (error.message === '401') {
+                        return alertToast();
+                    }
                     console.log("Couldn't log user in. ", error);
                 });
         },
@@ -115,12 +132,19 @@ const LoginForm = () => {
                     </Link>
                 </p>
 
-                {errorMsg && (
-                    <div className='flex items-center justify-evenly text-sm border border-red-200 w-72 mx-auto mt-6 py-2 bg-red-100'>
-                        <MdError />
-                        <p>{errorMsg}</p>
-                    </div>
-                )}
+                <ToastContainer
+                    position='top-center'
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme='light'
+                    transition={Bounce}
+                />
             </div>
         </div>
     );

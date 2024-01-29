@@ -1,11 +1,10 @@
-import { useContext, createContext, useState, useEffect } from 'react';
+import { useContext, createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
     const [token, setToken] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null)
     const navigate = useNavigate();
 
     // Log in to existing account
@@ -21,27 +20,19 @@ const AuthContextProvider = ({ children }) => {
                 if (response.ok) {
                     return response.json();
                 } else {
-                    throw new Error(response.status)
+                    throw new Error(response.status);
                 }
             })
             .then((data) => {
                 if (data.token && formData) {
                     localStorage.setItem('accessToken', data.token);
                     setToken(data.token);
-                    setErrorMsg(null);
                 }
             })
             .catch((error) => {
-                if (error.message === '401') {
-                    setErrorMsg('Invalid')
-                }
-                else {
-                    setErrorMsg('Something went wrong')
-                    console.log(
-                        'There was a problem when logging in to your account.',
-                        error
-                    );
-                }
+                console.log(
+                    'There was a problem when logging in to your account.');
+                throw error;
             });
     };
 
@@ -91,7 +82,7 @@ const AuthContextProvider = ({ children }) => {
                 register,
                 login,
                 logout,
-                errorMsg }}>
+            }}>
             {children}
         </AuthContext.Provider>
     );
