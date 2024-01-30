@@ -3,12 +3,15 @@ import { FaLongArrowAltRight } from 'react-icons/fa';
 import { useContext, useState } from 'react';
 import { CartContext } from '../../contexts/CartContext';
 import { ProductsContext } from '../../contexts/ProductsContext';
+import { OrderContext } from '../../contexts/OrderContext';
 
 const CheckoutPage = () => {
     const { products } = useContext(ProductsContext);
-    const { cartItems, addToCart, removeFromCart, clearCart, getCartTotal } =
+    const { orders, cartItems, addToCart, removeFromCart, clearCart, getCartTotal } =
         useContext(CartContext);
     const navigate = useNavigate();
+
+    console.log(cartItems)
 
     return (
         <div className='rounded-lg bg-white overflow-hidden border border-slate-300 shadow-md shadow-slate-400 mx-6 my-14 md:mx-auto max-w-2xl items-center px-4 sm:px-6 lg:max-w-3xl lg:px-8'>
@@ -87,15 +90,6 @@ const CheckoutPage = () => {
                                                             +
                                                         </button>
                                                     </div>
-                                                    {/* Remove from cart */}
-                                                    <button
-                                                        type='button'
-                                                        onClick={() =>
-                                                            removeFromCart(item)
-                                                        }
-                                                        className='font-medium text-orange-600 hover:opacity-75'>
-                                                        Remove
-                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -117,6 +111,7 @@ const CheckoutPage = () => {
                         <div className='my-6 flex justify-center'>
                             <button
                                 onClick={() => {
+                                    orders()
                                     clearCart();
                                     navigate('/checkoutsuccessfull');
                                 }}

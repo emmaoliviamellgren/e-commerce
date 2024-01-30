@@ -27,7 +27,7 @@ const Navbar = () => {
                 </li>
                 {isAuthorized && (
                     <li>
-                        <button onClick={() => logout()}>Log out</button>
+                        <button onClick={() => logout()} className='bg-orange-700 hover:bg-opacity-75 transition text-white hover:text-blue-900 px-3 py-1'>Log out</button>
                     </li>
                 )}
             </ul>

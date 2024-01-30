@@ -3,7 +3,10 @@ import { createContext, useState } from 'react';
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
+    const API_KEY = 'https://js2-ecommerce-api.vercel.app/api/orders';
+
     const [cartItems, setCartItems] = useState([]);
+    const [purchasedItems, setPurchasedItems] = useState([]);
 
     const displayAmountOfItems = () => {
         return cartItems.reduce((total, item) => total + item.quantity, 0);
@@ -65,10 +68,46 @@ const CartContextProvider = ({ children }) => {
         ); // calculate the total price of the items in the cart
     };
 
+    // Post purchased products to server
+    const orders = () => {
+            
+            const orderData = cartItems.map(product => ({
+                        productId: product._id,
+                        quantity: product.quantity
+                    }))
+
+            const getToken = localStorage.getItem('accessToken')
+
+            fetch(API_KEY, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': `Bearer ${getToken}`,
+                },
+                body: JSON.stringify({orderData}),
+            })
+                .then((response) => {
+                    if (response.status !== 201) {
+                        throw new Error();
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    setPurchasedItems(data.message);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+    };
+
+    console.log(purchasedItems)
+
     return (
         <CartContext.Provider
             value={{
+                orders,
                 cartItems,
+                purchasedItems,
                 addToCart,
                 removeFromCart,
                 clearCart,

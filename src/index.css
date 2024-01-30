@@ -7,3 +7,7 @@ body {
   color: rgba(0, 0, 93, 0.721);
   font-family: 'Poppins';
 }
+
+:root {
+  --toastify-font-family: 'Poppins' !important;
+}

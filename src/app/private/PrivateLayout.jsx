@@ -12,13 +12,13 @@ const PrivateLayout = () => {
     const navigate = useNavigate();
     const { token } = useAuth(AuthContext);
 
-    useEffect(() => {
-        if (token) {
-            navigate('/private');
-        } else {
-            navigate('/auth/login');
-        }
-    }, [token, navigate]);
+    // useEffect(() => {
+    //     if (token) {
+    //         navigate('/private');
+    //     } else {
+    //         navigate('/auth/login');
+    //     }
+    // }, [token, navigate]);
 
     return (
         <>

@@ -26,6 +26,7 @@ import CheckoutSuccessfulPage from './app/public/CheckoutSuccessfulPage';
 import LoginPage from './app/auth/LoginPage';
 import RegisterPage from './app/auth/RegisterPage';
 import OrderHistoryPage from './app/private/OrderHistoryPage';
+import OrderContextProvider from './contexts/OrderContext';
 
 const router = createBrowserRouter([
     {
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
                         path: 'checkoutsuccessfull',
                         element: <CheckoutSuccessfulPage />,
                     },
-                ]
+                ],
             },
             {
                 path: 'auth',
@@ -92,6 +93,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-            <RouterProvider router={router} />
+        <RouterProvider router={router} />
     </React.StrictMode>
 );
