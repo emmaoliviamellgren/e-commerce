@@ -8,3 +8,7 @@ This is a straightforward e-commerce and checkout application built with React a
 - **Shopping Cart:** Allow users to add products to their cart and proceed to checkout.
 - **User Authentication:** Secure user accounts with login and registration functionalities, by token authorization.
 - **Order Management:** View previously laid orders by order history.
+
+## Acknowledgments
+
+- Product data from by [Komplett.se](https://komplett.se).
