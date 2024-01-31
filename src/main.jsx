@@ -1,9 +1,9 @@
 // TODO:
-// 1. 401 UNAUHTORIZED RETURNERA ACCESSTOKEN VALUE INCORRECT EMAIL OR PASSWORD
-// 2. (EV) Fixa plus-symboler vid produkterna (i ProductCard)
-// 3. (EV) Skapa Skeleton när produkterna/API laddas
-// 4. (EV) fixa så att alert körs varje gång 'Add To Cart' klickas på
-// 5. (EV) expandera checkout-popovern (i Navbar)
+// 1. Fixa en korrekt order history
+// 2. Fixa private layout om användaren ej har ngn order history
+// 3. Gör conditional statement för Get:en/Post:
+// (EV) Fixa plus-symboler vid produkterna (i ProductCard)
+// (EV) expandera checkout-popovern (i Navbar)
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -26,7 +26,6 @@ import CheckoutSuccessfulPage from './app/public/CheckoutSuccessfulPage';
 import LoginPage from './app/auth/LoginPage';
 import RegisterPage from './app/auth/RegisterPage';
 import OrderHistoryPage from './app/private/OrderHistoryPage';
-import OrderContextProvider from './contexts/OrderContext';
 
 const router = createBrowserRouter([
     {
@@ -82,7 +81,7 @@ const router = createBrowserRouter([
                 errorElement: <ErrorPage />,
                 children: [
                     {
-                        path: 'orderhistory',
+                        index: true,
                         element: <OrderHistoryPage />,
                     },
                 ],

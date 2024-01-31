@@ -43,10 +43,8 @@ const OrderContextProvider = ({ children }) => {
             })
             .then((data) => {
                 setOrderHistory(data);
-                const totalQuantity = sumOfQuantity(data);
-                const totalPrice = sumOfPrice(data);
-                setTotalQuantity(totalQuantity);
-                setTotalPrice(totalPrice);
+                setTotalQuantity(sumOfQuantity(data));
+                setTotalPrice(sumOfPrice(data));
                 return data;
             })
 

@@ -9,6 +9,7 @@ const AuthContextProvider = ({ children }) => {
 
     // Log in to existing account
     const login = (formData) => {
+
         return fetch('https://js2-ecommerce-api.vercel.app/api/auth/login', {
             method: 'POST',
             headers: {
@@ -81,7 +82,7 @@ const AuthContextProvider = ({ children }) => {
                 setToken,
                 register,
                 login,
-                logout,
+                logout
             }}>
             {children}
         </AuthContext.Provider>
