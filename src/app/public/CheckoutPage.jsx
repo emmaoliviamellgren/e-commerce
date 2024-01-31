@@ -11,8 +11,6 @@ const CheckoutPage = () => {
         useContext(CartContext);
     const navigate = useNavigate();
 
-    console.log(cartItems)
-
     return (
         <div className='rounded-lg bg-white overflow-hidden border border-slate-300 shadow-md shadow-slate-400 mx-6 my-14 md:mx-auto max-w-2xl items-center px-4 sm:px-6 lg:max-w-3xl lg:px-8'>
             <div className='flex-1 overflow-y-auto px-4 py-6 sm:px-6'>
@@ -110,8 +108,7 @@ const CheckoutPage = () => {
                         </div>
                         <div className='my-6 flex justify-center'>
                             <button
-                                onClick={() => {
-                                    orders()
+                                onClick={() => {orders()
                                     clearCart();
                                     navigate('/checkoutsuccessfull');
                                 }}

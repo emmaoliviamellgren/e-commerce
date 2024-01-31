@@ -70,37 +70,35 @@ const CartContextProvider = ({ children }) => {
 
     // Post purchased products to server
     const orders = () => {
-            
-            const orderData = cartItems.map(product => ({
-                        productId: product._id,
-                        quantity: product.quantity
-                    }))
 
-            const getToken = localStorage.getItem('accessToken')
-
+            const token = localStorage.getItem('accessToken');
+    
+            const products = cartItems.map(product => ({
+                productId: product._id,
+                quantity: product.quantity
+            }))
+    
             fetch(API_KEY, {
                 method: 'POST',
                 headers: {
-                    'Content-type': 'application/json',
-                    'Authorization': `Bearer ${getToken}`,
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({orderData}),
+                body: JSON.stringify({products})
             })
-                .then((response) => {
-                    if (response.status !== 201) {
-                        throw new Error();
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    setPurchasedItems(data.message);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-    };
-
-    console.log(purchasedItems)
+            .then(response => {
+                if(response.status !== 201){
+                    throw new Error();
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
 
     return (
         <CartContext.Provider

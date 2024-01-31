@@ -10,15 +10,15 @@ import OrderContextProvider from './contexts/OrderContext';
 const RootLayout = () => {
     return (
         <AuthContextProvider>
-            <CartContextProvider>
-                <ProductsContextProvider>
-                    <OrderContextProvider>
+            <OrderContextProvider>
+                <CartContextProvider>
+                    <ProductsContextProvider>
                         <CategoryContextProvider>
                             <Outlet />
                         </CategoryContextProvider>
-                    </OrderContextProvider>
-                </ProductsContextProvider>
-            </CartContextProvider>
+                    </ProductsContextProvider>
+                </CartContextProvider>
+            </OrderContextProvider>
         </AuthContextProvider>
     );
 };

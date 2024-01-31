@@ -1,41 +1,76 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { useAuth } from './AuthContext';
-import { CartContext } from './CartContext';
 
 export const OrderContext = createContext();
 
 const OrderContextProvider = ({ children }) => {
-    const API_KEY = 'https://js2-ecommerce-api.vercel.app/api/orders';
     const [orderHistory, setOrderHistory] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalQuantity, setTotalQuantity] = useState(0);
 
-    const getToken = localStorage.getItem('accessToken');
+    const sumOfQuantity = (data) => {
+        return data.reduce((total, order) => {
+            const orderTotal = order.products.reduce((orderTotal, product) => {
+                return orderTotal + product.quantity;
+            }, 0);
+            return total + orderTotal;
+        }, 0);
+    };
+
+    const sumOfPrice = (data) => {
+        return data.reduce((total, order) => {
+            const orderTotal = order.products.reduce((orderTotal, product) => {
+                return orderTotal + product.product.price * product.quantity;
+            }, 0);
+            return total + orderTotal;
+        }, 0);
+    };
 
     // Get order history from server
-    fetch(API_KEY, {
-        headers: {
-            Authorization: `Bearer ${getToken}`,
-        },
-    })
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error();
-            }
-        })
-        .then((data) => {
-            setOrderHistory(data);
-            console.log(data);
-        })
 
-        .catch((error) => {
-            console.error('Error fetching order history:', error);
-        });
+    const fetchOrders = () => {
+        const token = localStorage.getItem('accessToken');
+
+        fetch('https://js2-ecommerce-api.vercel.app/api/orders', {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(response.status);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setOrderHistory(data);
+                const totalQuantity = sumOfQuantity(data);
+                const totalPrice = sumOfPrice(data);
+                setTotalQuantity(totalQuantity);
+                setTotalPrice(totalPrice);
+                return data;
+            })
+
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
     return (
-        <OrderContext.Provider value={orderHistory}>
+        <OrderContext.Provider
+            value={{ orderHistory, fetchOrders, totalPrice, totalQuantity }}>
             {children}
         </OrderContext.Provider>
     );
 };
 export default OrderContextProvider;
+
+export const useOrderContext = () => {
+    const context = useContext(OrderContext);
+
+    if (!context)
+        throw new Error(
+            'useOrderContext must be inside an OrderContextProvider'
+        );
+
+    return context;
+};
