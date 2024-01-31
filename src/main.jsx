@@ -1,10 +1,3 @@
-// TODO:
-// 1. Fixa en korrekt order history
-// 2. Fixa private layout om användaren ej har ngn order history
-// 3. Gör conditional statement för Get:en/Post:
-// (EV) Fixa plus-symboler vid produkterna (i ProductCard)
-// (EV) expandera checkout-popovern (i Navbar)
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';

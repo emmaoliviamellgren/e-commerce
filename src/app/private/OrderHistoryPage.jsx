@@ -7,6 +7,7 @@ const OrderHistoryPage = () => {
         useOrderContext(OrderContext);
 
     useEffect(() => {
+        if (orderHistory !== null)
         fetchOrders();
     }, []);
 
@@ -15,9 +16,10 @@ const OrderHistoryPage = () => {
 
     return (
         <div className='mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8'>
-            <h2 className='text-2xl font-bold tracking-tight text-gray-900 mb-4'>
+            <h2 className='text-2xl tracking-tight text-gray-700 mb-4'>
                 Order history
             </h2>
+            {orderHistory.length === 0 && <p className='mt-8 text-sm italic text-gray-400 font-bold'>You have no previous orders.</p>}
                 {orders &&
                     orders.map((order) => {
                         return (

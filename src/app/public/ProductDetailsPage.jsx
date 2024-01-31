@@ -18,7 +18,7 @@ const ProductDetailsPage = () => {
 
     if (!product) {
         return (
-        <div className='h-screen flex items-center'>
+        <div className='h-screen flex items-center justify-center'>
             <div className='text-center my-8 text-2xl'>Loading...</div>
         </div>
         )

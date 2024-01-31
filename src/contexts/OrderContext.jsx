@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 export const OrderContext = createContext();
 
@@ -26,7 +26,6 @@ const OrderContextProvider = ({ children }) => {
     };
 
     // Get order history from server
-
     const fetchOrders = () => {
         const token = localStorage.getItem('accessToken');
 

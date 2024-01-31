@@ -6,11 +6,12 @@ import { useState } from 'react';
 import * as Yup from 'yup';
 
 const ContactForm = () => {
+
     // Error message
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
 
-    // Fetch API for posting message
+    // Posting message
     const postData = (values) => {
         fetch('https://js2-ecommerce-api.vercel.app/api/messages', {
             method: 'POST',
@@ -34,7 +35,6 @@ const ContactForm = () => {
             });
     };
 
-    // Creating form with Formik
     const form = useFormik({
         initialValues: {
             name: '',
