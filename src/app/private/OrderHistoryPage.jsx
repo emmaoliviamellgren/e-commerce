@@ -14,6 +14,14 @@ const OrderHistoryPage = () => {
     // Sort orders from newest to oldest
     const orders = orderHistory.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
+    if (!orders) {
+        return (
+        <div className='h-screen w-screen flex items-center justify-center'>
+            <div className='text-center my-8 text-2xl'>Loading...</div>
+        </div>
+        )
+    }
+
     return (
         <div className='mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8'>
             <h2 className='text-2xl tracking-tight text-gray-700 mb-4'>
