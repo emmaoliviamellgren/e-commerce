@@ -1,56 +1,67 @@
 const Order = (props) => {
     const products = props.order.products;
+    const orderItem = props.order;
 
-    // return (
-    //     <>
-    //         {products.map((productItem) => (
-    //             <li key={productItem.product._id} className="bg-gray-200 p-12">
-    //                 <p>{productItem.product._id}</p>
-    //                 <p>{productItem.product.name}</p>
-    //                 <img
-    //                     src={productItem.product.images[0]}
-    //                     alt={productItem.product.name}
-    //                     className='w-full h-full object-contain'
-    //                 />
-    //                 <p>{productItem.product.price}</p>
-    //                 <p>{productItem.product.quantity}</p>
-    //             </li>
-    //         ))}
-    //     </>
-    // );
+    // Display amount of items ordered per order
+    const itemsPerOrder = products.reduce(
+        (total, productItem) => total + productItem.quantity,
+        0
+    );
 
     return (
         <>
-            {products.map((productItem) => (
-                <div
-                    key={productItem.product._id}
-                    className='group relative'>
-                    <div className='w-full overflow-hidden rounded-md bg-gray-200'>
-                        <img
-                            src={productItem.product.images[0]}
-                            alt={productItem.product.name}
-                            className='h-full w-full object-contain'
-                        />
-                    </div>
-                    <div className='mt-4 flex justify-between'>
-                        <div>
-                            <h3 className='text-sm text-gray-700'>
-                                <span
-                                    aria-hidden='true'
-                                    className='absolute inset-0'
-                                />
-                                {productItem.product.name}
-                            </h3>
-                            <p className='mt-1 text-sm text-gray-500'>
-                            Qty: {productItem.quantity}
-                            </p>
+            <div className='flex'>
+                <div className='rounded-lg bg-white overflow-hidden border border-slate-300 shadow-md shadow-slate-400 my-4 max-w-2xl lg:max-w-6xl'>
+                    <div className='flex flex-col justify-center text-sm text-gray-500'>
+                        <div className='border-b-4'>
+                            <div className='flex py-4 px-12 bg-gray-200 justify-center gap-x-2'>
+                                <span className='font-bold'>Order no:</span>{' '}
+                                <span>{orderItem._id}</span>
+                            </div>
+                            <div className='p-2 flex justify-center gap-x-2'>
+                                <span className='font-bold'>Total price:</span>{' '}
+                                <span>{orderItem.totalPrice} SEK</span>
+                            </div>
+                            <div className='p-2 flex justify-center gap-x-2'>
+                                <span className='font-bold'>
+                                    Items ordered:
+                                </span>{' '}
+                                <span>{itemsPerOrder}</span>
+                            </div>
                         </div>
-                        <p className='text-sm font-medium text-gray-900'>
-                            {productItem.product.price}
-                        </p>
+                    </div>
+                    <div className='flex flex-col lg:flex-row justify-center'>
+                        {products.map((productItem) => (
+                            <div
+                                key={productItem.product._id}
+                                className='group relative'>
+                                <div className='h-60 w-full overflow-hidden rounded-md'>
+                                    <img
+                                        src={productItem.product.images[0]}
+                                        alt={productItem.product.name}
+                                        className='h-full w-full object-contain p-6'
+                                    />
+                                </div>
+                                <div className='my-6 flex justify-around'>
+                                    <div>
+                                        <span className='text-sm text-gray-700'>
+                                            {productItem.product.name}
+                                        </span>
+                                        <div className='flex justify-between items-center mt-2'>
+                                            <span className='text-sm text-gray-500'>
+                                                Qty: {productItem.quantity}
+                                            </span>
+                                            <span className='text-sm font-medium text-gray-900'>
+                                                {productItem.product.price} SEK
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            ))}
+            </div>
         </>
     );
 };

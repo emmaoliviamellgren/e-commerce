@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 export const OrderContext = createContext();
 
@@ -26,7 +26,6 @@ const OrderContextProvider = ({ children }) => {
     };
 
     // Get order history from server
-
     const fetchOrders = () => {
         const token = localStorage.getItem('accessToken');
 
@@ -43,10 +42,8 @@ const OrderContextProvider = ({ children }) => {
             })
             .then((data) => {
                 setOrderHistory(data);
-                const totalQuantity = sumOfQuantity(data);
-                const totalPrice = sumOfPrice(data);
-                setTotalQuantity(totalQuantity);
-                setTotalPrice(totalPrice);
+                setTotalQuantity(sumOfQuantity(data));
+                setTotalPrice(sumOfPrice(data));
                 return data;
             })
 

@@ -8,7 +8,6 @@ import CategoryContextProvider from '../../contexts/CategoryContext';
 // Components
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
-import OrderContextProvider from '../../contexts/OrderContext';
 
 const PublicLayout = () => {
     return (

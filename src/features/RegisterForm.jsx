@@ -2,7 +2,6 @@ import { FaExclamationCircle } from 'react-icons/fa';
 import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { useState } from 'react';
 
 // Contexts
 import { useAuth, AuthContext } from '../contexts/AuthContext';

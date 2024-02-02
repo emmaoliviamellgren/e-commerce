@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { OrderContext, useOrderContext } from '../../contexts/OrderContext';
 import Order from '../../components/Order';
 
@@ -7,39 +7,21 @@ const OrderHistoryPage = () => {
         useOrderContext(OrderContext);
 
     useEffect(() => {
+        if (orderHistory !== null)
         fetchOrders();
     }, []);
 
-    // return (
-    //     <div className='mx-auto my-20 w-[28rem] lg:w-[60rem] px-16 xl:px-56 py-20 border border-slate-300 shadow-md shadow-slate-400 bg-white rounded-lg'>
-    //         <h1 className='text-center text-xl'>Order history</h1>
-    //         <ul>
-    //             {orderHistory &&
-    //                 orderHistory.map((order) => {
-    //                     return (
-    //                         <OrderItem
-    //                             order={order}
-    //                             key={order._id}
-    //                         />
-    //                     );
-    //                 })}
-    //         </ul>
-    //         <ul className='bg-red-200'>
-    //             <li>Total Price: {totalPrice}</li>
-    //             <li>Total Quantity: {totalQuantity}</li>
-    //         </ul>
-    //     </div>
-    // );
+    // Sort orders from newest to oldest
+    const orders = orderHistory.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     return (
-        <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8'>
-            <h2 className='text-2xl font-bold tracking-tight text-gray-900'>
+        <div className='mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8'>
+            <h2 className='text-2xl tracking-tight text-gray-700 mb-4'>
                 Order history
             </h2>
-
-            <div className='mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-                {orderHistory &&
-                    orderHistory.map((order) => {
+            {orderHistory.length === 0 && <p className='mt-8 text-sm italic text-gray-400 font-bold'>You have no previous orders.</p>}
+                {orders &&
+                    orders.map((order) => {
                         return (
                             <Order
                                 order={order}
@@ -47,11 +29,6 @@ const OrderHistoryPage = () => {
                             />
                         );
                     })}
-            </div>
-            <div>
-                Total Price: {totalPrice}
-                Total Quantity: {totalQuantity}
-            </div>
         </div>
     );
 };

@@ -26,10 +26,10 @@ const UserButtonLoggedIn = () => {
                             <div className='rounded-lg bg-white overflow-hidden border border-slate-300 shadow-md shadow-slate-400'>
                                 <div className='bg-gray-50 p-4 text-center flex flex-col gap-y-2'>
                                     <NavLink
-                                        to='/private/orderhistory'
+                                        to='/private'
                                         className='text-sm font-semibold transition outline-none hover:text-orange-700 flex flex-row gap-x-2 items-center justify-center'>
                                         <FiLogIn className='text-xl' />
-                                        <p>Order History</p>
+                                        <p>Private pages</p>
                                     </NavLink>
                                 </div>
                             </div>

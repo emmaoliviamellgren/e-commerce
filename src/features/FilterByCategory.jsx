@@ -1,12 +1,11 @@
-import { ProductsContext } from '../contexts/ProductsContext';
-import { CategoryContext } from '../contexts/CategoryContext';
-
 import { useContext, Fragment } from 'react';
 import { Transition, Popover } from '@headlessui/react';
 import { GoChevronDown } from 'react-icons/go';
 
+// Contexts
+import { CategoryContext } from '../contexts/CategoryContext';
+
 const FilterByCategory = () => {
-    const { products } = useContext(ProductsContext);
     const {
         addCategory,
         removeCategory,
