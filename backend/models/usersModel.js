@@ -7,29 +7,22 @@ exports.fetchUser = async (req, res) => {
   try {
     const getUser = await User.find({});
     res.json(getUser);
-    console.log(getUser)
   } catch (error) {
     res.status(500).json({ message: 'Something went wrong!' })
   }
 
 }
 
-exports.registerUser = (req, res) => {
-    
-  const { email, password } = req.body;
+exports.registerUser = async (req, res) => {
 
-  if(!email || !password) {
-    res.status(400).json({ message: 'Please enter all fields correctly'})
-    return
-  }
+    try {
+      const { email, password } = req.body;
 
-  User.create({ email, password })
-    .then(user => {
-      res.status(201).json(user)
-    })
-    .catch(err => {
-      console.log(err.message)
+      const regUser = await User.create({ email, password })
+      res.status(201).json(regUser)
+
+    } catch (error) {
+      console.log(error.message)
       res.status(500).json({ message: 'Something went wrong!' })
-    })
-
+    }
 }
