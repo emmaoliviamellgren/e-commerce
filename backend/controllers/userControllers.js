@@ -1,9 +1,8 @@
 const router = require('express').Router()
 
-// Destructured
-const { fetchUser, registerUser } = require('../models/userModel')
+const { logInUser, registerUser } = require('../models/userModel')
 
 router.post('/', registerUser)
-router.get('/', fetchUser)
+router.post('/login', logInUser)
 
 module.exports = router;

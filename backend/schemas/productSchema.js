@@ -1,11 +1,10 @@
-// import mongoose from 'mongoose';
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    price: { type: Number, required: true },
-    description: { type: String, required: true },
-    category: { type: String, required: true },
+    name: { type: String, required: [true, 'Name is required'] },
+    price: { type: Number, required: [true, 'Price is required and must be of type number'] },
+    description: { type: String, required: [true, 'Description is required'] },
+    category: { type: String, required: [true, 'Category is required'] },
     images: { type: Array, default: [] },
 });
 
