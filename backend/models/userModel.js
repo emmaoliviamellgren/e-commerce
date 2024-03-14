@@ -1,4 +1,4 @@
-const User = require('../schemas/usersSchema')
+const User = require('../schemas/userSchema')
 
 //Vi vill exportera detta som en namngedd export
 

@@ -10,11 +10,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Controllers
-const usersControllers = require('./controllers/usersControllers')
-const productsControllers = require('./controllers/productsControllers')
+const userControllers = require('./controllers/userControllers')
+const productControllers = require('./controllers/productControllers')
 
 //När vi gå in på denna api-url, vill jag använda denna controller
-app.use('/api/users', usersControllers);
-app.use('/api/products', productsControllers);
+app.use('/api/users', userControllers);
+app.use('/api/products', productControllers);
 
 module.exports = app;

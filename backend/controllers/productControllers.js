@@ -1,7 +1,7 @@
 const router = require('express').Router()
 
 // Destructured
-const { fetchAllProducts, fetchProduct, postProduct, updateProduct, deleteProduct } = require('../models/productsModel')
+const { fetchAllProducts, fetchProduct, postProduct, updateProduct, deleteProduct } = require('../models/productModel')
 
 router.get('/', fetchAllProducts)
 router.get('/:id', fetchProduct)

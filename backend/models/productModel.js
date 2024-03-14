@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Products = require('../schemas/productsSchema');
+const Products = require('../schemas/productSchema');
 
 exports.postProduct = async (req, res) => {
     try {
@@ -45,8 +45,8 @@ exports.fetchProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
     try {
         if (!mongoose.isValidObjectId(req.params.id)) {
-            res.status(400).json({ message: 'ObjectId not valid' });
-            throw Error;
+            res.status(400);
+            throw new Error('ObjectId not vali');
         }
 
         const updatedProduct = await Products.findByIdAndUpdate(
@@ -57,6 +57,7 @@ exports.updateProduct = async (req, res) => {
             }
         );
         res.json(updatedProduct);
+
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong!' });
     }
