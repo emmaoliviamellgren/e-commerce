@@ -4,29 +4,22 @@ const Order = require('../schemas/orderSchema');
 const User = require('../schemas/userSchema');
 
 exports.postOrder = async (req, res) => {
+    const { products, user } = req.body;
+
+    if (!mongoose.isValidObjectId(user)) {
+        return res.status(400).json({
+            message: 'Invalid user!',
+        });
+    }
+
     try {
-        // Check if user is logged in
-        const user = await User.findOne({ token: req.user.token });
+        const postOrder = await Order.create({
+            user,
+            products,
+        });
 
-        if (user) {
-            const { productId, quantity } = req.body;
-
-            // Save the order to the database
-            const postOrder = await Order.create({
-                user: user._id,
-                products: [
-                    {
-                        productId, quantity
-                    }
-                ]
-            });
-
-            res.status(201).json(postOrder);
-        } else {
-            throw new Error('Not logged in!');
-        }
+        res.status(201).json(postOrder);
     } catch (error) {
-        console.log(error)
         res.status(500).json({
             message: 'Something went wrong when creating the order!',
         });
@@ -40,12 +33,18 @@ exports.fetchOrder = async (req, res) => {
             throw Error;
         }
 
-        const populatedOrder = await Order.findById(req.params.id).populate(
+        const user = await User.findOne(user._id);
+        const orders = await Order.findOne(user._id).populate(
             'products.productId'
         );
 
-        res.json(populatedOrder);
+        // const populatedOrder = await Order.findById(req.params.id).populate(
+        //     'products.productId'
+        // );
+
+        res.json(orders);
     } catch (error) {
+        console.log(error);
         res.status(500).json({
             message: 'Something went wrong when fetching the order!',
         });
