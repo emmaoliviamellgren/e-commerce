@@ -1,8 +1,9 @@
 const router = require('express').Router()
 
-const { postOrder } = require('../models/orderModel')
+const { postOrder, fetchOrder } = require('../models/orderModel')
 const { authenticateToken } = require('../models/userModel');
 
 router.post('/', authenticateToken, postOrder)
+router.get('/:id', fetchOrder)
 
 module.exports = router;
