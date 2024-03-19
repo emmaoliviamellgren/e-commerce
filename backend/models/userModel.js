@@ -11,8 +11,8 @@ exports.authenticateToken = async (req, res, next) => {
     if (token === null) return res.status(401).send('Access unauthorized');
 
     // Check if user has valid token
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (user) => {
-        // if(error) return res.status(403).send('Token no longer valid');
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, user) => {
+        if(error) return res.status(403).send('Token no longer valid');
         req.user = user;
         next();
     });
@@ -27,12 +27,15 @@ exports.registerUser = async (req, res) => {
 
         const user = await User.create({ email, password: hashedPassword });
 
-        //authentication
+        // Authentication (token expires in 1h)
         const auth = await jwt.sign(
             user.email,
-            process.env.ACCESS_TOKEN_SECRET
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: '1h' }
         );
+
         res.json({ message: 'User created!', token: auth });
+
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong' });
     }

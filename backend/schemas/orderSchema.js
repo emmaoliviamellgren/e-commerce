@@ -1,30 +1,27 @@
 const mongoose = require('mongoose');
 
-const Products = require('./productSchema');
-const User = require('./userSchema');
-
 const orderSchema = new mongoose.Schema({
-    user: { 
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: User
+        ref: 'User',
     },
     products: [
         {
             productId: {
                 type: mongoose.Schema.Types.ObjectId,
-                // required: [true, 'Product id is required'],
-                ref: Products
+                required: [true, 'Product id is required'],
+                ref: 'Products',
             },
             quantity: {
                 type: Number,
-                // required: [
-                //     true,
-                //     'Quantity is required and must be of type number',
-                // ],
+                required: [
+                    true,
+                    'Quantity is required and must be of type number',
+                ],
             },
         },
     ],
-});
+}, { timestamps: true });
 
 const Order = mongoose.model('Order', orderSchema);
 

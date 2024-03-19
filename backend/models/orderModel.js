@@ -33,14 +33,11 @@ exports.fetchOrder = async (req, res) => {
             throw Error;
         }
 
-        const user = await User.findOne(user._id);
-        const orders = await Order.findOne(user._id).populate(
-            'products.productId'
-        );
+        const userHasToken = await Order.find({ user: token })
 
-        // const populatedOrder = await Order.findById(req.params.id).populate(
-        //     'products.productId'
-        // );
+        const orders = await Order.find({ user: req.params.id }).populate(
+            'products'
+        );
 
         res.json(orders);
     } catch (error) {
