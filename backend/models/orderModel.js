@@ -33,7 +33,12 @@ exports.fetchOrder = async (req, res) => {
             throw Error;
         }
 
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
+
         const userHasToken = await Order.find({ user: token })
+
+        if(!userHasToken) return res.status(401).json({ message: 'No token found' })
 
         const orders = await Order.find({ user: req.params.id }).populate(
             'products'
