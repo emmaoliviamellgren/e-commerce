@@ -4,7 +4,7 @@ const Order = require('../schemas/orderSchema');
 const User = require('../schemas/userSchema');
 
 exports.postOrder = async (req, res) => {
-    const { products, user } = req.body;
+    const { user, products } = req.body;
 
     if (!mongoose.isValidObjectId(user)) {
         return res.status(400).json({
@@ -14,7 +14,7 @@ exports.postOrder = async (req, res) => {
 
     try {
         const postOrder = await Order.create({
-            user,
+            user,  // Save the user's ID with the order,
             products,
         });
 
@@ -33,15 +33,8 @@ exports.fetchOrder = async (req, res) => {
             throw Error;
         }
 
-        const authHeader = req.headers['authorization'];
-        const token = authHeader && authHeader.split(' ')[1];
-
-        const userHasToken = await Order.find({ user: token })
-
-        if(!userHasToken) return res.status(401).json({ message: 'No token found' })
-
         const orders = await Order.find({ user: req.params.id }).populate(
-            'products'
+            'products.productId'
         );
 
         res.json(orders);

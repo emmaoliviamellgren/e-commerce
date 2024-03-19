@@ -11,8 +11,13 @@ exports.authenticateToken = async (req, res, next) => {
     if (token === null) return res.status(401).send('Access unauthorized');
 
     // Check if user has valid token
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, user) => {
-        if(error) return res.status(403).send('Token no longer valid');
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,
+        (error, user) => {
+        console.log(user);
+        if (error) {
+            console.log(error);
+            return res.status(403).send('Token no longer valid');
+        }
         req.user = user;
         next();
     });
@@ -27,16 +32,18 @@ exports.registerUser = async (req, res) => {
 
         const user = await User.create({ email, password: hashedPassword });
 
-        // Authentication (token expires in 1h)
+        // Authentication
         const auth = await jwt.sign(
             user.email,
-            process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '1h' }
+            process.env.ACCESS_TOKEN_SECRET
         );
 
-        res.json({ message: 'User created!', token: auth });
-
+        res.json({
+            message: 'User created!',
+            token: auth,
+        });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: 'Something went wrong' });
     }
 };
@@ -51,18 +58,18 @@ exports.logInUser = async (req, res) => {
         if (user == null) {
             return res.status(400).json({ message: 'Cannot find user' });
         }
-        // Authentication (token expires in 1h)
+        // Authentication
         const auth = await jwt.sign(
             user.email,
-            process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '1h' }
+            process.env.ACCESS_TOKEN_SECRET
         );
 
         // Comparing encrypted password to password that was input
         if (await bcrypt.compare(password, user.password)) {
-            return res
-                .status(200)
-                .json({ message: 'User logged in!', token: auth });
+            return res.status(200).json({
+                message: 'User logged in!',
+                token: auth,
+            });
         } else {
             return res.status(401).json({ message: 'Invalid password' });
         }
