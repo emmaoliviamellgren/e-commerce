@@ -8,15 +8,13 @@ exports.authenticateToken = async (req, res, next) => {
     // If authorization header exists, return the token value of the bearer prop from the header
     const token = authHeader && authHeader.split(' ')[1];
 
-    if (token === null) return res.status(401).send('Access unauthorized');
+    if (token === null) return res.status(401).json({ message: 'Access unauthorized' });
 
     // Check if user has valid token
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,
-        (error, user) => {
-        console.log(user);
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,(error, user) => {
         if (error) {
-            console.log(error);
-            return res.status(403).send('Token no longer valid');
+            console.log(error.message);
+            return res.status(403).json({ message: 'There was an error verifying the token' });
         }
         req.user = user;
         next();

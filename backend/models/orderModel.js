@@ -26,12 +26,20 @@ exports.postOrder = async (req, res) => {
     }
 };
 
+// Orderhistorik: Användaren ska kunna hämta alla sina tidigare lagda ordrar genom att göra en GET och skicka med en Bearer token.
+
 exports.fetchOrder = async (req, res) => {
     try {
         if (!mongoose.isValidObjectId(req.params.id)) {
             res.status(400).json({ message: 'ObjectId not valid' });
             throw Error;
         }
+
+        // const authHeader = req.headers['authorization'];
+
+        // const token = authHeader && authHeader.split(' ')[1];
+
+        // if(!token) return res.status(401).send('Access unauthorized');
 
         const orders = await Order.find({ user: req.params.id }).populate(
             'products.productId'
