@@ -14,8 +14,7 @@ exports.postOrder = async (req, res) => {
     
     try {
 
-        if (token === null)
-            return res.status(401).json({ message: 'Access unauthorized' });
+        if (token === null) return res.status(401).json({ message: 'Access unauthorized' });
 
         // Check if user has valid token
         const verifiedUser = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);

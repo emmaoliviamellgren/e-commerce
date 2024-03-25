@@ -8,8 +8,7 @@ exports.authenticateToken = async (req, res, next) => {
     // If authorization header exists, return the token value of the bearer prop from the header
     const token = authHeader && authHeader.split(' ')[1];
 
-    if (token === null)
-        return res.status(401).json({ message: 'Access unauthorized' });
+    if (token === null) return res.status(401).json({ message: 'Access unauthorized' });
 
     // Check if user has valid token
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (error, user) => {
@@ -29,10 +28,7 @@ exports.registerUser = async (req, res) => {
         const { email, password } = req.body;
 
         const userExists = await User.exists({ email });
-        if (userExists) {
-            res.status(400);
-            throw new Error('The email address is already taken');
-        }
+        if (userExists) return res.status(400).json({message: 'The email address is already taken'});
 
         // Password encryption
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -64,9 +60,7 @@ exports.logInUser = async (req, res) => {
         // Finding user in db
         const user = await User.findOne({ email });
 
-        if (user == null) {
-            return res.status(400).json({ message: 'Cannot find user' });
-        }
+        if (user == null) return res.status(400).json({ message: 'Cannot find user' });
 
         // Authentication - token payload with user email and id
         const payload = {
