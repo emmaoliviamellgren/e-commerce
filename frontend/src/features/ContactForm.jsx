@@ -13,7 +13,7 @@ const ContactForm = () => {
 
     // Posting message
     const postData = (values) => {
-        fetch('https://js2-ecommerce-api.vercel.app/api/messages', {
+        fetch('/api/messages', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -31,7 +31,7 @@ const ContactForm = () => {
                 return response.json();
             })
             .then((data) => {
-                setSuccess(data.message);
+                setSuccess('Message sent successfully!');
             });
     };
 

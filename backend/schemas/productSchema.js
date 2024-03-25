@@ -11,12 +11,6 @@ const productSchema = new mongoose.Schema({
     images: { type: Array, default: [] },
 });
 
-// productSchema.virtual('products', {
-//     ref: 'Products',
-//     localField: '_id',
-//     foreignField: 'productId',
-// });
-
 const Products = mongoose.model('Products', productSchema);
 
 module.exports = Products;

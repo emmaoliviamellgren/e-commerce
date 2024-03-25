@@ -20,7 +20,7 @@ const Order = (props) => {
                             </div>
                             <div className='p-2 flex justify-center gap-x-2'>
                                 <span className='font-bold'>Total price:</span>{' '}
-                                <span>{orderItem.totalPrice} SEK</span>
+                                <span>{orderItem.totalAmount} SEK</span>
                             </div>
                             <div className='p-2 flex justify-center gap-x-2'>
                                 <span className='font-bold'>
@@ -33,26 +33,26 @@ const Order = (props) => {
                     <div className='flex flex-col lg:flex-row justify-center'>
                         {products.map((productItem) => (
                             <div
-                                key={productItem.product._id}
+                                key={productItem.productId._id}
                                 className='group relative'>
                                 <div className='h-60 w-full overflow-hidden rounded-md'>
                                     <img
-                                        src={productItem.product.images[0]}
-                                        alt={productItem.product.name}
+                                        src={productItem.productId.images[0]}
+                                        alt={productItem.productId.name}
                                         className='h-full w-full object-contain p-6'
                                     />
                                 </div>
                                 <div className='my-6 flex justify-around'>
                                     <div>
                                         <span className='text-sm text-gray-700'>
-                                            {productItem.product.name}
+                                            {productItem.productId.name}
                                         </span>
-                                        <div className='flex justify-between items-center mt-2'>
+                                        <div className={`flex justify-between items-center mt-2 ${products.length === 1  && `flex-col`}`}>
                                             <span className='text-sm text-gray-500'>
                                                 Qty: {productItem.quantity}
                                             </span>
                                             <span className='text-sm font-medium text-gray-900'>
-                                                {productItem.product.price} SEK
+                                                {productItem.productId.price} SEK
                                             </span>
                                         </div>
                                     </div>

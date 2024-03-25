@@ -48,7 +48,7 @@ const router = createBrowserRouter([
                         element: <CheckoutPage />,
                     },
                     {
-                        path: 'checkoutsuccessfull',
+                        path: 'checkoutsuccessful',
                         element: <CheckoutSuccessfulPage />,
                     },
                 ],

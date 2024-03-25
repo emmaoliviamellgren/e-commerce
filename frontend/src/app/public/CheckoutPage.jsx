@@ -107,7 +107,7 @@ const CheckoutPage = () => {
                             <button
                                 onClick={() => {orders()
                                     clearCart();
-                                    navigate('/checkoutsuccessfull');
+                                    navigate('/checkoutsuccessful');
                                 }}
                                 className='text-center mx-auto text-sm bg-orange-700 text-white transition hover:opacity-75 px-4 py-2 rounded-md shadow-md shadow-orange-400 tracking-wide w-1/3'>
                                 Checkout
