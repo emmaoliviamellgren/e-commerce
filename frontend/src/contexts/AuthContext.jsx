@@ -9,8 +9,7 @@ const AuthContextProvider = ({ children }) => {
 
     // Log in to existing account
     const login = (formData) => {
-
-        return fetch('https://js2-ecommerce-api.vercel.app/api/auth/login', {
+        return fetch('http://localhost:3333/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -32,14 +31,15 @@ const AuthContextProvider = ({ children }) => {
             })
             .catch((error) => {
                 console.log(
-                    'There was a problem when logging in to your account.');
+                    'There was a problem when logging in to your account.'
+                );
                 throw error;
             });
     };
 
     // Register new account
     const register = (formData) => {
-        return fetch('https://js2-ecommerce-api.vercel.app/api/auth/register', {
+        return fetch('http://localhost:3333/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -82,7 +82,7 @@ const AuthContextProvider = ({ children }) => {
                 setToken,
                 register,
                 login,
-                logout
+                logout,
             }}>
             {children}
         </AuthContext.Provider>

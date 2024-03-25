@@ -1,9 +1,10 @@
 import { createContext, useState } from 'react';
+import { jwtDecode } from "jwt-decode";
 
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
-    const API_KEY = 'https://js2-ecommerce-api.vercel.app/api/orders';
+    const API_KEY = 'http://localhost:3333/api/orders';
 
     const [cartItems, setCartItems] = useState([]);
     const [purchasedItems, setPurchasedItems] = useState([]);
@@ -11,7 +12,7 @@ const CartContextProvider = ({ children }) => {
     const displayAmountOfItems = () => {
         return cartItems.reduce((total, item) => total + item.quantity, 0);
     };
-    
+
     // Add items to cart
     const addToCart = (item) => {
         const isItemInCart = cartItems.find(
@@ -70,35 +71,37 @@ const CartContextProvider = ({ children }) => {
 
     // Post purchased products to server
     const orders = () => {
+        const token = localStorage.getItem('accessToken');
+        // Decode the token and extract the user ID
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken._id;
 
-            const token = localStorage.getItem('accessToken');
-    
-            const products = cartItems.map(product => ({
-                productId: product._id,
-                quantity: product.quantity
-            }))
-    
-            fetch(API_KEY, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({products})
-            })
-            .then(response => {
-                if(response.status !== 201){
+        const products = cartItems.map((product) => ({
+            productId: product._id,
+            quantity: product.quantity,
+        }));
+
+        fetch(API_KEY, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ user: userId, products }),
+        })
+            .then((response) => {
+                if (response.status !== 201) {
                     throw new Error();
                 }
                 return response.json();
             })
-            .then(data => {
-                console.log(data)
+            .then(() => {
+                console.log('Purchase successful!');
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error('Error:', error);
             });
-    }
+    };
 
     return (
         <CartContext.Provider

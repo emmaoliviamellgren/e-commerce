@@ -9,7 +9,7 @@ const CategoryContextProvider = ({ children }) => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categories, setCategories] = useState([]);
 
-    const API_KEY = `https://js2-ecommerce-api.vercel.app/api/products`;
+    const API_KEY = `http://localhost:3333/api/products`;
 
     // Fetching categories from API
         useEffect(() => {
