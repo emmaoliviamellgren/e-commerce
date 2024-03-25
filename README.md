@@ -9,6 +9,35 @@ This is a straightforward e-commerce and checkout application built with React a
 - **User Authentication:** Secure user accounts with login and registration functionalities, by token authorization.
 - **Order Management:** View previously created orders with order history.
 
+## Installation
+
+### Clone this repository to your local machine.
+
+```
+git clone https://github.com/your-username/e-commerce.git
+```
+
+### Navigate to the project directory.
+
+```
+cd e-commerce
+```
+
+### Install dependencies using npm.
+
+```
+npm install
+```
+
+### Set up your environment variables.
+You'll need a URI-string for MongoDB and a secret token access key.
+
+### Run the application locally.
+
+```
+npm start
+```
+
 ## Acknowledgments
 
 - Product data from by [Komplett.se](https://komplett.se).
