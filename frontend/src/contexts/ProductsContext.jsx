@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 export const ProductsContext = createContext();
 
 const ProductsContextProvider = ({ children }) => {
-    const API_KEY = 'http://localhost:3333/api/products';
+    const API_KEY = '/api/products';
     const [products, setProducts] = useState([]);
 
     useEffect(() => {

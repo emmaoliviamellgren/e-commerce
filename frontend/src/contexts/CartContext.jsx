@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
-    const API_KEY = 'http://localhost:3333/api/orders';
+    const API_KEY = '/api/orders';
 
     const [cartItems, setCartItems] = useState([]);
     const [purchasedItems, setPurchasedItems] = useState([]);

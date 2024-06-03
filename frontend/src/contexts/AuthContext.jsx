@@ -9,7 +9,7 @@ const AuthContextProvider = ({ children }) => {
 
     // Log in to existing account
     const login = (formData) => {
-        return fetch('http://localhost:3333/api/auth/login', {
+        return fetch('/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -39,7 +39,7 @@ const AuthContextProvider = ({ children }) => {
 
     // Register new account
     const register = (formData) => {
-        return fetch('http://localhost:3333/api/auth/register', {
+        return fetch('/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',

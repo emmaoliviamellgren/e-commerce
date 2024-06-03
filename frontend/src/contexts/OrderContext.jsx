@@ -7,30 +7,12 @@ const OrderContextProvider = ({ children }) => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalQuantity, setTotalQuantity] = useState(0);
 
-    // const sumOfQuantity = (data) => {
-    //     return data.reduce((total, order) => {
-    //         const orderTotal = order.products.reduce((orderTotal, product) => {
-    //             return orderTotal + product.quantity;
-    //         }, 0);
-    //         return total + orderTotal;
-    //     }, 0);
-    // };
-
-    // const sumOfPrice = (data) => {
-    //     return data.reduce((total, order) => {
-    //         const orderTotal = order.products.reduce((orderTotal, product) => {
-    //             return orderTotal + product.product.price * product.quantity;
-    //         }, 0);
-    //         return total + orderTotal;
-    //     }, 0);
-    // };
-
     // Get order history from server
     const fetchOrders = () => {
 
         const token = localStorage.getItem('accessToken');
         
-        fetch('http://localhost:3333/api/orders', {
+        fetch('/api/orders', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -43,8 +25,6 @@ const OrderContextProvider = ({ children }) => {
         })
         .then((data) => {
             setOrderHistory(data);
-            // setTotalQuantity(sumOfQuantity(data));
-            // setTotalPrice(sumOfPrice(data));
             return data;
         })
         

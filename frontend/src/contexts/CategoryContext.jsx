@@ -9,7 +9,7 @@ const CategoryContextProvider = ({ children }) => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categories, setCategories] = useState([]);
 
-    const API_KEY = `http://localhost:3333/api/products`;
+    const API_KEY = '/api/products';
 
     // Fetching categories from API
         useEffect(() => {
