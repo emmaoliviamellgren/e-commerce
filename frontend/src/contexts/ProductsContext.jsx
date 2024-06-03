@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 export const ProductsContext = createContext();
 
 const ProductsContextProvider = ({ children }) => {
-    const API_KEY = `${process.env.REACT_APP_BACKEND_URL}/api/products`;
+    const API_KEY = `https://e-commerce-backend-cjxu.onrender.com/api/products`;
     const [products, setProducts] = useState([]);
 
     console.log(API_KEY)
