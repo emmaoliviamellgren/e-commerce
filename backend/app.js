@@ -6,13 +6,13 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
-// Use the frontend build folder
-app.use(express.static(__dirname + '/../frontend/dist'));
+// // Use the frontend build folder
+// app.use(express.static(__dirname + '/../frontend/dist'));
 
-// Render client for any route
-app.get('*', (req, res) =>
-    res.sendFile(__dirname + '/../frontend/dist/index.html')
-);
+// // Render client for any route
+// app.get('*', (req, res) =>
+//     res.sendFile(__dirname + '/../frontend/dist/index.html')
+// );
 
 // Controllers
 const userControllers = require('./controllers/userControllers');
