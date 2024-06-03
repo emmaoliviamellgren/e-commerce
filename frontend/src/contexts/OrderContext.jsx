@@ -11,7 +11,7 @@ const OrderContextProvider = ({ children }) => {
     const fetchOrders = () => {
         const token = localStorage.getItem('accessToken');
 
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/orders`, {
+        fetch(`https://e-commerce-backend-cjxu.onrender.com/api/orders`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

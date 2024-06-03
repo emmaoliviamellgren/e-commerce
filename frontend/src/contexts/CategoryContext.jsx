@@ -9,7 +9,7 @@ const CategoryContextProvider = ({ children }) => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categories, setCategories] = useState([]);
 
-    const API_KEY = `${process.env.REACT_APP_BACKEND_URL}/api/products`;
+    const API_KEY = `https://e-commerce-backend-cjxu.onrender.com/api/products`;
 
     // Fetching categories from API
     useEffect(() => {
