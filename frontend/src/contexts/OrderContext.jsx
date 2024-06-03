@@ -9,27 +9,26 @@ const OrderContextProvider = ({ children }) => {
 
     // Get order history from server
     const fetchOrders = () => {
-
         const token = localStorage.getItem('accessToken');
-        
-        fetch('/api/orders', {
+
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/orders`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(response.status);
-            }
-            return response.json();
-        })
-        .then((data) => {
-            setOrderHistory(data);
-            return data;
-        })
-        
-        .catch((error) => {
-            console.log(error.message);
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(response.status);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setOrderHistory(data);
+                return data;
+            })
+
+            .catch((error) => {
+                console.log(error.message);
             });
     };
 

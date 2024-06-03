@@ -9,7 +9,7 @@ const AuthContextProvider = ({ children }) => {
 
     // Log in to existing account
     const login = (formData) => {
-        return fetch('/api/auth/login', {
+        return fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -39,7 +39,7 @@ const AuthContextProvider = ({ children }) => {
 
     // Register new account
     const register = (formData) => {
-        return fetch('/api/auth/register', {
+        return fetch(`${process.env.REACT_APP_BACKEND_URL}/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',

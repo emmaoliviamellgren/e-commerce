@@ -9,18 +9,20 @@ const CategoryContextProvider = ({ children }) => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categories, setCategories] = useState([]);
 
-    const API_KEY = '/api/products';
+    const API_KEY = `${process.env.REACT_APP_BACKEND_URL}/api/products`;
 
     // Fetching categories from API
-        useEffect(() => {
-            fetch(API_KEY)
-                .then((response) => response.json())
-                .then((data) => {
-                    // Using Set constructor to remove category duplicates
-                    const categoryList = [...new Set(data.map(item => item.category))];
-                    setCategories(categoryList);
-                });
-        }, [API_KEY]);
+    useEffect(() => {
+        fetch(API_KEY)
+            .then((response) => response.json())
+            .then((data) => {
+                // Using Set constructor to remove category duplicates
+                const categoryList = [
+                    ...new Set(data.map((item) => item.category)),
+                ];
+                setCategories(categoryList);
+            });
+    }, [API_KEY]);
 
     // Adding categories
     const addCategory = (category) => {
@@ -66,7 +68,7 @@ const CategoryContextProvider = ({ children }) => {
                 resetCategories,
                 selectedCategories,
                 categories,
-                filteredProducts
+                filteredProducts,
             }}>
             {children}
         </CategoryContext.Provider>
