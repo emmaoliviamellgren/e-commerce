@@ -6,8 +6,6 @@ const ProductsContextProvider = ({ children }) => {
     const API_KEY = `https://e-commerce-backend-cjxu.onrender.com/api/products`;
     const [products, setProducts] = useState([]);
 
-    console.log(API_KEY)
-
     useEffect(() => {
         fetch(API_KEY)
             .then((response) => {
