@@ -6,6 +6,8 @@ const ProductsContextProvider = ({ children }) => {
     const API_KEY = `${process.env.REACT_APP_BACKEND_URL}/api/products`;
     const [products, setProducts] = useState([]);
 
+    console.log(API_KEY)
+
     useEffect(() => {
         fetch(API_KEY)
             .then((response) => {
