@@ -22,6 +22,7 @@ exports.postProduct = async (req, res) => {
 exports.fetchAllProducts = async (req, res) => {
     try {
         const fetchAllProducts = await Products.find({});
+        console.log(fetchAllProducts);
         res.json(fetchAllProducts);
     } catch (error) {
         res.status(500).json({ message: 'Something went wrong!' });
