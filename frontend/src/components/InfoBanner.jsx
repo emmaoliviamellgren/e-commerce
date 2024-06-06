@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export const InfoBanner = () => {
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
     if (!isOpen) return null;
 
