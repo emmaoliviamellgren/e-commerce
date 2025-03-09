@@ -2,6 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
+// For pinging the server to check if it is running
+app.get('/api/health', (req, res) => {
+	return res.status(200).send('Server is running!');
+});
+
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
@@ -16,10 +21,5 @@ app.use('/api/auth', userControllers);
 app.use('/api/products', productControllers);
 app.use('/api/messages', messageControllers);
 app.use('/api/orders', orderControllers);
-
-// For pinging the server to check if it is running
-app.get('/api/health', (req, res) => {
-	return res.status(200).send('Server is running!');
-});
 
 module.exports = app;
