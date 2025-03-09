@@ -18,8 +18,8 @@ app.use('/api/messages', messageControllers);
 app.use('/api/orders', orderControllers);
 
 // For pinging the server to check if it is running
-app.get('/api/health', (res) => {
-	res.status(200).send('Server is running!');
+app.get('/api/health', (req, res) => {
+	return res.status(200).send('Server is running!');
 });
 
 module.exports = app;
