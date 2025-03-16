@@ -7,11 +7,7 @@ const MONGOURI = process.env.MONGO_URI;
 const mongoose = require("mongoose");
 
 mongoose
-	.connect(MONGOURI, {
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		keepAlive: true,
-	})
+	.connect(MONGOURI)
 	.then(() => {
 		console.log("Successfully connected to MongoDB!");
 		app.listen(PORT, () =>
