@@ -10,8 +10,6 @@ mongoose
 	.connect(MONGOURI, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
-		serverSelectionTimeoutMS: 30000,
-		socketTimeoutMS: 60000,
 		keepAlive: true,
 	})
 	.then(() => {
